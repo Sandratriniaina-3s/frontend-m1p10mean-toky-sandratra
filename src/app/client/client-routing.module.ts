@@ -4,13 +4,11 @@ import { CarHistoryComponent } from './car-history/car-history.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { CarsListComponent } from './cars-list/cars-list.component';
 import { ClientAccountComponent } from './client-account/client-account.component';
-import { HomeComponent } from './home/home.component';
 import { RepairsDetailsComponent } from './repairs-details/repairs-details.component';
 import { RepairsListComponent } from './repairs-list/repairs-list.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path:'home', component:HomeComponent,data:{title:'Accueil'}},
+    { path: '', redirectTo: 'cars', pathMatch: 'full' },
     {
       path :'cars',
       children:[

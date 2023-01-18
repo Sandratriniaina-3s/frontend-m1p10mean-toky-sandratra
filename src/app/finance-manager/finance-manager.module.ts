@@ -7,6 +7,7 @@ import { PaymentsListComponent } from './payments-list/payments-list.component';
 import { PaymentsFormComponent } from './payments-form/payments-form.component';
 import { PaymentsDetailComponent } from './payments-detail/payments-detail.component';
 import { AdministrationComponent } from './administration/administration.component';
+import { FinanceService } from './finance.service';
 
 
 @NgModule({
@@ -21,6 +22,12 @@ import { AdministrationComponent } from './administration/administration.compone
   imports: [
     CommonModule,
     FinanceManagerRoutingModule
+  ],
+  providers:[
+    {
+      provide:FinanceService,
+      useClass:FinanceService
+    }
   ]
 })
 export class FinanceManagerModule { }
