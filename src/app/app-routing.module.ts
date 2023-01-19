@@ -8,17 +8,9 @@ const routes: Routes = [
       loadChildren:() => import('./authentication/authentication.module').then((m)=> m.AuthenticationModule),
     },
     {
-        path: 'garage',
-        loadChildren: () => import('./client/client.module').then((m) => m.ClientModule),
+      path:'root',
+      loadChildren:() => import('./root/root.module').then((m)=> m.RootModule),
     },
-    {
-      path:'workshop',
-      loadChildren:() => import('./workshop/workshop.module').then((m)=>m.WorkshopModule),
-    },
-    {
-      path:'finance',
-      loadChildren:()=>import('./finance-manager/finance-manager.module').then((m)=>m.FinanceManagerModule)
-    }
 ];
 
 @NgModule({

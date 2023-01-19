@@ -1,0 +1,25 @@
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 100px 100vh 100px;
+    grid-template-areas: "navbar" "content" "footer";
+}
+
+.navbar {
+    grid-area: navbar;
+    width: 100%;
+    background-color: rebeccapurple;
+    text-align: center;
+}
+
+.content {
+    grid-area: content;
+    width: 100%;
+}
+
+.footer {
+    grid-area: footer;
+    width: 100%;
+    background-color: rebeccapurple;
+    text-align: center;
+}
