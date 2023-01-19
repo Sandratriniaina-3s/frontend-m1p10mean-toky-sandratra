@@ -5,6 +5,7 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthenticationService } from './authentication.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AuthenticationService } from './authentication.service';
   ],
   imports: [
     CommonModule,
-    AuthenticationRoutingModule
+    AuthenticationRoutingModule,
+    ReactiveFormsModule
   ],
   providers:[
     {
