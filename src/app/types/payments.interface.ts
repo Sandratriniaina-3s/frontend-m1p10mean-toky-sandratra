@@ -16,8 +16,9 @@ export enum PaymentStatus{
 
 export interface Bill{
     _id:any,
+    date:Date,
     repair: string | Repair,
     car:string | Car,
     client: string | User,
-    amount:number,
+    totalAmount:number,
 }

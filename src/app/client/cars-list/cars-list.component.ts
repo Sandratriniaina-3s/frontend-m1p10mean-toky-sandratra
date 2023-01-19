@@ -11,16 +11,16 @@ import { ClientService } from '../client.service';
 export class CarsListComponent implements OnInit, OnDestroy {
 
   constructor(private clientService: ClientService) { }
-  
+
   cars: Car[] = [];
   subs = new SubSink();
-  
+
   ngOnInit(): void {
     this.subs.sink = this.clientService.getAllCars().subscribe((cars)=>{
       this.cars = cars;
     })
   }
-  
+
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
