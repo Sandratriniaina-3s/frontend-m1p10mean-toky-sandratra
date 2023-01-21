@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { MatIconModule } from '@angular/material/icon';
 import { ClientRoutingModule } from './client-routing.module';
 import { CarsListComponent } from './cars-list/cars-list.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ClientRoutingModule,
     ReactiveFormsModule,
+    MatIconModule,
     FormsModule
   ],
   providers:[

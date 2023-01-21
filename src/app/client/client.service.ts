@@ -20,8 +20,8 @@ export class ClientService {
     return this.http.get(`${environment.apiUrl}/cars/${carId}`).pipe(map((response:ApiResponse) => response.data as Car));
   }
 
-  deleteCar(carId:string):Observable<Car>{
-    return this.http.delete(`${environment.apiUrl}/cars/${carId}`).pipe(map((response:ApiResponse) => response.data as Car));
+  deleteCar(carId:string):Observable<void>{
+    return this.http.delete(`${environment.apiUrl}/cars/${carId}`).pipe(map(() => {}));
   }
 
   saveCar(car:Car):Observable<Car>{

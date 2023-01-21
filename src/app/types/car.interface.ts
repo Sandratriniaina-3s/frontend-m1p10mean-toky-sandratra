@@ -5,6 +5,7 @@ export interface Car{
     brand:string,
     model:string,
     registration:string,
+    isInReparation:boolean,
     client:string | User
 }
 

@@ -18,15 +18,32 @@ export class CarsListComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
 
   ngOnInit(): void {
+    this.loadCars();
+  }
+
+  loadCars(){
     this.subs.sink = this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
       this.cars = cars;
-    })
+    })  
   }
 
   search(): void{
     this.subs.sink = this.clientService.getAllCars({...DEFAULT_CRITERIA, search:this.searchTerm}).subscribe((cars)=>{
       this.cars = cars;
     })
+  }
+
+  onDelete(car : string):void{
+    this.clientService.deleteCar(car).subscribe(res=>{
+      this.cars = this.cars.filter(item => item._id !== car);
+    })
+    setTimeout(()=>{
+      this.loadCars();
+    },200)
+  }
+
+  click(id:string){
+    console.log(id);
   }
 
   ngOnDestroy(): void {

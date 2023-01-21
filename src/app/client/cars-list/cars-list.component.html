@@ -7,9 +7,20 @@
             <button><img src="/assets/images/search.svg" alt="" (click)="search()"></button>
         </div>
         <div class="list">
-            <p *ngFor="let car of cars">
-                {{car.brand}}
-            </p>
+            <div class="card" *ngFor="let car of cars">
+                <img [src]="car.isInReparation ? '/assets/images/red-car.png' : '/assets/images/green-car.png'" alt="" class="sign">
+                <div class="info">
+                    <div class="card-content">
+                        <h4>{{car.registration}}</h4>
+                        <p>{{car.brand}}-{{car.brand}} </p>
+                    </div>
+                    <div class="card-actions">
+                        <img src="/assets/images/history.png" alt="" class="action-icon">
+                        <img src="/assets/images/edit.png" alt="" class="action-icon">
+                        <img src="/assets/images/trash.png" alt="" class="action-icon" (click)="onDelete(car._id)">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

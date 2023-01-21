@@ -4,10 +4,10 @@
 
 .list-layout {
     width: 70%;
-    background-color: rebeccapurple;
     display: grid;
     margin: auto;
     grid-template-rows: 60px auto;
+    gap: 30px;
     grid-template-areas: "search" "list";
 }
 
@@ -51,4 +51,48 @@
 .search-bar button img {
     width: 20px;
     height: 20px;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: grid;
+    width: 45%;
+    grid-template-columns: 20% 80%;
+    align-items: center;
+    position: relative;
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 1, 0.232);
+    padding: 10px;
+}
+
+.sign {
+    width: 80px;
+}
+
+.action-icon {
+    width: 20px;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.action-icon {
+    border-radius: 30%;
+    padding: 5px;
+    z-index: 2;
+}
+
+.action-icon:hover {
+    cursor: pointer;
 }
