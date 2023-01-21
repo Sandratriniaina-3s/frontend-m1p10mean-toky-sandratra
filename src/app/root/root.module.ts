@@ -11,7 +11,7 @@ import { RootComponent } from './root/root.component';
   ],
   imports: [
     CommonModule,
-    RootRoutingModule
+    RootRoutingModule,
   ]
 })
 export class RootModule { }
