@@ -118,6 +118,40 @@ html {
     display: none;
 }
 
+.logged {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.logged:hover {
+    cursor: pointer;
+}
+
+.logged p {
+    margin: unset;
+    font-family: Poppins-Medium;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.668);
+}
+
+.logged img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+}
+
+.logged .action {
+    position: absolute;
+    top: 60px;
+}
+
+.mat-raised-button {
+    color: rgba(0, 0, 0, 0.668) !important;
+}
+
 .content {
     grid-area: content;
     width: 100%;

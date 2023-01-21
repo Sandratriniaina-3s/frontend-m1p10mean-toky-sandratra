@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./root.component.css']
 })
 export class RootComponent {
+  isOpen:boolean = false;
+  constructor(){}
+  toggleMenu(){
+    this.isOpen = !this.isOpen;
+  }
 
+  logOut(){}
 }

@@ -38,7 +38,11 @@
             </div>
         </div>
         <div class="logged">
-            <p>logged</p>
+            <p>Username </p>
+            <img (click)="toggleMenu()" [src]="isOpen ? '/assets/images/arrow-up.png' : '/assets/images/arrow-down.png'" alt="">
+            <div class="action" *ngIf="isOpen">
+                <button mat-raised-button (click)="logOut()">Se déconnecter</button>
+            </div>
         </div>
     </div>
     <div class="content">
