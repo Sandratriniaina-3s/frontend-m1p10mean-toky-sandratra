@@ -1,3 +1,15 @@
-<p *ngFor="let car of cars">
-    {{car.brand}}
-</p>
+<div class="container">
+    <div class="list-layout">
+        <div class="search-bar">
+            <form>
+                <input type="text" placeholder="Rechercher ..." [(ngModel)]="searchTerm" class="search" [ngModelOptions]="{standalone: true}">
+            </form>
+            <button><img src="/assets/images/search.svg" alt="" (click)="search()"></button>
+        </div>
+        <div class="list">
+            <p *ngFor="let car of cars">
+                {{car.brand}}
+            </p>
+        </div>
+    </div>
+</div>

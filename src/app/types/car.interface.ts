@@ -7,3 +7,7 @@ export interface Car{
     registration:string,
     client:string | User
 }
+
+export interface Criteria{
+    search:string,
+}

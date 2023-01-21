@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { environment } from 'environments/environment.dev';
-import { Car } from '../types/car.interface';
+import { Car, Criteria } from '../types/car.interface';
 import { ApiResponse } from '../types/shared.interface';
 @Injectable()
 
@@ -10,8 +10,10 @@ export class ClientService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCars(): Observable<Car[]>{
-    return this.http.get(`${environment.apiUrl}/cars`).pipe(map((response: ApiResponse)=> response.data as Car[]));
+  getAllCars(criteria:Criteria): Observable<Car[]>{
+    return this.http
+              .get(`${environment.apiUrl}/cars`, {params:{...criteria}})
+              .pipe(map((response: ApiResponse)=> response.data as Car[]));
   }
 
   getCarById(carId:string):Observable<Car>{

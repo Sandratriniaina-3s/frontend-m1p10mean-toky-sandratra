@@ -10,6 +10,7 @@ import { RepairsDetailsComponent } from './repairs-details/repairs-details.compo
 import { RepairsFormComponent } from './repairs-form/repairs-form.component';
 import { CarHistoryComponent } from './car-history/car-history.component';
 import { ClientService } from './client.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +25,9 @@ import { ClientService } from './client.service';
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers:[
     {
