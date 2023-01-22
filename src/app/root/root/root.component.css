@@ -33,6 +33,7 @@
     src: url('../../../assets/fonts/montserrat/Montserrat-Regular.ttf');
 }
 
+/*
 * {
     margin: 0px;
     padding: 0px;
@@ -161,4 +162,81 @@ html {
     width: 100%;
     background-color: rebeccapurple;
     text-align: center;
+}*/
+
+/* ---------------------------------- */
+
+.mat-sidenav-container {
+  height: 100%;
 }
+
+.mat-sidenav {
+  background-color: #6675DF;
+}
+
+.mat-sidenav-content {
+  background-color: white;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar-container {
+  border-bottom: 1px solid rgba(63, 63, 63, 0.301);
+  background: linear-gradient(180deg, #f7f7f7, rgba(63, 63, 63, 0.075));
+  color: #6675DF;
+  font-weight: bold;
+}
+
+.app-name {
+  letter-spacing: 2px;
+  color: #dddfe2;
+  text-shadow: -1px 1px 0 #6675DF, 1px 1px 0 #6675DF, 1px -1px 0 #6675DF, -1px -1px 0 #6675DF;
+}
+
+.app-name:hover {
+  color: #6675DF;
+  text-shadow: -1px 1px 0 #dddfe2, 1px 1px 0 #dddfe2, 1px -1px 0 #dddfe2, -1px -1px 0 #dddfe2;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.profile .mat-icon {
+  height: unset;
+  width: unset;
+}
+
+.profile-icon {
+  vertical-align: top;
+  font-size: 34px;
+  margin-right: 8px;
+}
+
+.mat-menu-button-icon,
+.mat-menu-button {
+  font-weight: normal;
+}
+
+.mat-menu-button:hover {
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.178);
+}
+
+::ng-deep .cdk-overlay-pane {
+  margin-top: 17px;
+}
+
+footer{
+  position:fixed;
+  bottom:0px;
+  background-color: rebeccapurple;
+  text-align: center;
+  width:100%;
+}
+
+

@@ -21,6 +21,7 @@ const routes: Routes = [
     {
       path :'repairs',
       children:[
+        {path:'', redirectTo:'list',pathMatch:'full'},
         {path:'list', component:RepairsListComponent,data:{title : 'Voitures'}},
         {path:'detail/:repairId', component:RepairsDetailsComponent,data:{title : 'Voiture'}},
       ]
