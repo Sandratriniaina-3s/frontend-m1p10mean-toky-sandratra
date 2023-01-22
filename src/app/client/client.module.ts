@@ -11,6 +11,7 @@ import { RepairsFormComponent } from './repairs-form/repairs-form.component';
 import { CarHistoryComponent } from './car-history/car-history.component';
 import { ClientService } from './client.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ClientRoutingModule,
     ReactiveFormsModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule
   ],
   providers:[
     {

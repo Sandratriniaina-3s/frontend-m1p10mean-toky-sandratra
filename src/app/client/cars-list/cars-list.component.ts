@@ -1,4 +1,6 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit,OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { EMPTY_CAR } from 'src/app/constants/car.constants';
 import { Car } from 'src/app/types/car.interface';
 import { SubSink } from 'subsink';
 import { DEFAULT_CRITERIA } from '../client.contants';
@@ -11,15 +13,31 @@ import { ClientService } from '../client.service';
 })
 export class CarsListComponent implements OnInit, OnDestroy {
 
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private formBuilder: FormBuilder) { }
 
   cars: Car[] = [];
   subs = new SubSink();
   searchTerm: string = '';
+  currentCar!:Car;
+  isEditing:boolean = false;
 
   ngOnInit(): void {
     this.loadCars();
   }
+
+  // set car(car:Car){
+  //   this.subs.sink = this.clientService.getCarById(this.currentCar._id).subscribe((car)=>{
+  //     this.form = this.initForm(car);
+  //   })
+  // }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.currentCar){
+      this.form = this.initForm(this.currentCar);
+    }
+  }
+  
+  form = this.initForm(EMPTY_CAR);
 
   loadCars(){
     this.subs.sink = this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
@@ -42,11 +60,30 @@ export class CarsListComponent implements OnInit, OnDestroy {
     },200)
   }
 
+  edit(car:Car){
+    this.form = this.initForm(car);
+    this.currentCar = car;
+    this.isEditing = true;
+  }
+
+  cancelEdit(){
+    this.isEditing = false;
+  }
+
   click(id:string){
     console.log(id);
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  private initForm(car:Car){
+    return this.formBuilder.group({
+      _id:[car._id],
+      brand:[car.brand],
+      model:[car.model],
+      registration:[car.registration]
+    })
   }
 }

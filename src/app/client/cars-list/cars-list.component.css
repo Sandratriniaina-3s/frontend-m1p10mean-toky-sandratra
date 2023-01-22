@@ -93,6 +93,20 @@
     z-index: 2;
 }
 
-.action-icon:hover {
+.mat-icon:hover {
     cursor: pointer;
+}
+
+#edit,
+#done {
+    color: #26b46a;
+}
+
+#delete,
+#close {
+    color: #da0c3f;
+}
+
+#list {
+    color: #2e2e2e;
 }

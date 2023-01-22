@@ -11,16 +11,57 @@
                 <img [src]="car.isInReparation ? '/assets/images/red-car.png' : '/assets/images/green-car.png'" alt="" class="sign">
                 <div class="info">
                     <div class="card-content">
-                        <h4>{{car.registration}}</h4>
-                        <p>{{car.brand}}-{{car.brand}} </p>
+                        <ng-container *ngTemplateOutlet="car._id === currentCar?._id && isEditing ? carForm : carDetail ; context:{$implicit:car}">
+                        </ng-container>
                     </div>
-                    <div class="card-actions">
-                        <img src="/assets/images/history.png" alt="" class="action-icon">
-                        <img src="/assets/images/edit.png" alt="" class="action-icon">
-                        <img src="/assets/images/trash.png" alt="" class="action-icon" (click)="onDelete(car._id)">
+                    <div class="card-content" *ngIf="currentCar && currentCar._id === null">
+                        <ng-container *ngTemplateOutlet="carForm; context:{$implicit:car}"></ng-container>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template #carDetail let-car>
+    <div class="card-content ">
+        <h4>{{car?.registration}}</h4>
+        <p>{{car?.brand}}-{{car?.model}} </p>
+    </div>
+    <div class="card-actions">
+        <mat-icon *ngIf="!isEditing" id="list">list</mat-icon>
+        <mat-icon *ngIf="!isEditing" (click)="edit(car) " id="edit">edit</mat-icon>
+        <mat-icon *ngIf="!isEditing" (click)="onDelete(car._id) " id="delete">delete</mat-icon>
+    </div>
+</ng-template>
+
+
+<ng-template #carForm>
+    <ng-container>
+        <form [formGroup]="form">
+            <!-- <mat-form-field MatFormFieldControl="brand ">
+                <mat-label>Marque</mat-label>
+                <input matInput type="text " #brandInput formControlName="brand ">
+                <mat-error> Champ requis</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Modèle</mat-label>
+                <input matInput type="text " #modelInput formControlName="model ">
+                <mat-error> Champ requis</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Numero d'immatriculation</mat-label>
+                <input matInput type="text " #registrationInput formControlName="registration ">
+                <mat-error> Champ requis</mat-error>
+            </mat-form-field> -->
+            <input type="text " formControlName="brand">
+            <input type="text " formControlName="model">
+            <input type="text " formControlName="registration">
+        </form>
+        <div class="card-actions">
+            <mat-icon *ngIf="isEditing" id="done">done</mat-icon>
+            <mat-icon *ngIf="isEditing" (click)="cancelEdit() " id="close">close</mat-icon>
+        </div>
+    </ng-container>
+</ng-template>

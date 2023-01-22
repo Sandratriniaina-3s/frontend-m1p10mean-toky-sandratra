@@ -33,210 +33,78 @@
     src: url('../../../assets/fonts/montserrat/Montserrat-Regular.ttf');
 }
 
-/*
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-body,
-html {
-    height: 100%;
-    font-family: Poppins-Regular, sans-serif;
-}
-
-.container {
-    width: 100%;
-    display: grid;
-    grid-template-rows: 80px 100vh 80px;
-    grid-template-areas: "navbar" "content" "footer";
-}
-
-.navbar {
-    grid-area: navbar;
-    width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.logo,
-.logged {
-    width: 20%;
-}
-
-.link-container {
-    width: 100%;
-    height: 70%;
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px #4e4e4e66;
-    border-radius: 10px;
-}
-
-.links {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.links a {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    text-decoration: none;
-    transition: all 0.5s;
-    padding: 0 5px;
-    margin: unset;
-    font-size: 15px;
-    font-family: Poppins-Medium;
-    color: rgba(0, 0, 0, 0.668);
-}
-
-.links a:hover {
-    color: #fff;
-    background-color: #6675DF;
-    transform: scale(1.05);
-}
-
-.active {
-    color: #fff !important;
-    background-color: #6675DF;
-    transform: scale(1.05);
-}
-
-#workshop,
-#finance {
-    display: none;
-}
-
-.logged {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-}
-
-.logged:hover {
-    cursor: pointer;
-}
-
-.logged p {
-    margin: unset;
-    font-family: Poppins-Medium;
-    font-size: 15px;
-    color: rgba(0, 0, 0, 0.668);
-}
-
-.logged img {
-    width: 15px;
-    height: 15px;
-    margin-left: 5px;
-}
-
-.logged .action {
-    position: absolute;
-    top: 60px;
-}
-
-.mat-raised-button {
-    color: rgba(0, 0, 0, 0.668) !important;
-}
-
-.content {
-    grid-area: content;
-    width: 100%;
-}
-
-.footer {
-    grid-area: footer;
-    width: 100%;
-    background-color: rebeccapurple;
-    text-align: center;
-}*/
 
 /* ---------------------------------- */
 
 .mat-sidenav-container {
-  height: 100%;
+    height: 100%;
 }
 
 .mat-sidenav {
-  background-color: #6675DF;
+    background-color: #6675DF;
 }
 
 .mat-sidenav-content {
-  background-color: white;
+    background-color: white;
 }
 
 .spacer {
-  flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 
 .toolbar-container {
-  border-bottom: 1px solid rgba(63, 63, 63, 0.301);
-  background: linear-gradient(180deg, #f7f7f7, rgba(63, 63, 63, 0.075));
-  color: #6675DF;
-  font-weight: bold;
+    border-bottom: 1px solid rgba(63, 63, 63, 0.301);
+    background: linear-gradient(180deg, #f7f7f7, rgba(63, 63, 63, 0.075));
+    color: #6675DF;
+    font-weight: bold;
 }
 
 .app-name {
-  letter-spacing: 2px;
-  color: #dddfe2;
-  text-shadow: -1px 1px 0 #6675DF, 1px 1px 0 #6675DF, 1px -1px 0 #6675DF, -1px -1px 0 #6675DF;
+    letter-spacing: 2px;
+    color: #dddfe2;
+    text-shadow: -1px 1px 0 #6675DF, 1px 1px 0 #6675DF, 1px -1px 0 #6675DF, -1px -1px 0 #6675DF;
 }
 
 .app-name:hover {
-  color: #6675DF;
-  text-shadow: -1px 1px 0 #dddfe2, 1px 1px 0 #dddfe2, 1px -1px 0 #dddfe2, -1px -1px 0 #dddfe2;
-  font-weight: bold;
-  cursor: pointer;
+    color: #6675DF;
+    text-shadow: -1px 1px 0 #dddfe2, 1px 1px 0 #dddfe2, 1px -1px 0 #dddfe2, -1px -1px 0 #dddfe2;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .pointer:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .profile .mat-icon {
-  height: unset;
-  width: unset;
+    height: unset;
+    width: unset;
 }
 
 .profile-icon {
-  vertical-align: top;
-  font-size: 34px;
-  margin-right: 8px;
+    vertical-align: top;
+    font-size: 34px;
+    margin-right: 8px;
 }
 
 .mat-menu-button-icon,
 .mat-menu-button {
-  font-weight: normal;
+    font-weight: normal;
 }
 
 .mat-menu-button:hover {
-  cursor: pointer;
-  background-color: rgba(128, 128, 128, 0.178);
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, 0.178);
 }
 
 ::ng-deep .cdk-overlay-pane {
-  margin-top: 17px;
+    margin-top: 17px;
 }
 
-footer{
-  position:fixed;
-  bottom:0px;
-  background-color: rebeccapurple;
-  text-align: center;
-  width:100%;
+footer {
+    position: fixed;
+    bottom: 0px;
+    background-color: rebeccapurple;
+    text-align: center;
+    width: 100%;
 }
-
-
