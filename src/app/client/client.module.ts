@@ -12,6 +12,7 @@ import { CarHistoryComponent } from './car-history/car-history.component';
 import { ClientService } from './client.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ReactiveFormsModule,
     MatIconModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers:[
     {
