@@ -1,0 +1,62 @@
+.btn-expand {
+  display: block;
+  height: 48px;
+  width: 100%;
+  padding: 0;
+}
+
+.chevron-btn {
+  color: white;
+}
+
+.btn-expand .chevron-btn {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+  right: 0;
+  float: right;
+  position: absolute;
+}
+
+.btn-expand .chevron-btn.rotated {
+  transform: rotate(180deg);
+}
+
+.separator {
+  margin-top: 7px;
+}
+
+.mdc-list-item .mat-icon,
+.mdc-list-item .item-title {
+  color: white;
+}
+
+.mdc-list-item:hover .mat-icon,
+.mdc-list-item:hover .item-title {
+  color: #6675DF;
+}
+
+.mdc-list-item:hover,
+.mdc-list-item:focus {
+  background-color: white;
+}
+
+.mat-mdc-list-item-interactive::before {
+  background: none;
+}
+
+.item-title {
+  margin-left: 20px;
+}
+
+.active {
+  background-color: white;
+}
+
+.active .mat-icon,
+.active .item-title {
+  color: #6675DF;
+}
+
+.list-item .mat-icon {
+  vertical-align: sub;
+}

@@ -1,0 +1,57 @@
+<mat-nav-list>
+  <div class="btn-expand">
+    <button mat-icon-button class="chevron-btn" (click)="isExpanded = !isExpanded" [ngClass]="{'rotated':isExpanded}">
+      <mat-icon>
+        chevron_right
+      </mat-icon>
+    </button>
+  </div>
+  <mat-divider class="separator"></mat-divider>
+  <!--CLIENT-->
+  <ng-container *ngIf="userRole == 'Client'">
+    <mat-list-item routerLink="garage/cars" class="list-item" routerLinkActive="active">
+      <mat-icon>directions_car</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Voitures</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="garage/repairs" class="list-item" routerLinkActive="active">
+      <mat-icon>build</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Reparations</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="garage/profil" class="list-item" routerLinkActive="active">
+      <mat-icon>account_box</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Mon compte</span>
+    </mat-list-item>
+  </ng-container>
+  <!--WORKSHOP-->
+  <ng-container *ngIf="userRole == 'Responsable atelier'">
+    <mat-list-item routerLink="workshop/repairs" class="list-item" routerLinkActive="active">
+      <mat-icon>build</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Reparations</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="workshop/operations" class="list-item" routerLinkActive="active">
+      <mat-icon>sell</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Operations</span>
+    </mat-list-item>
+  </ng-container>
+  <!--FINANCE-->
+  <ng-container *ngIf="userRole == 'Responsable financier'">
+    <mat-list-item routerLink="finance/dashboard" class="list-item" routerLinkActive="active">
+      <mat-icon>dashboard</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Tableau de bord</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="finance/payment" class="list-item" routerLinkActive="active">
+      <mat-icon>paid</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Paiements</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item routerLink="finance/administration" class="list-item" routerLinkActive="active">
+      <mat-icon>verified_user</mat-icon>
+      <span *ngIf="isExpanded" class="item-title">Administration</span>
+    </mat-list-item>
+  </ng-container>
+  <mat-divider></mat-divider>
+</mat-nav-list>

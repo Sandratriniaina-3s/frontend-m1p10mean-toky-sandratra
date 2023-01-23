@@ -12,6 +12,7 @@ const routes: Routes = [
     {
       path : 'payment',
       children:[
+        { path:'', redirectTo:'list', pathMatch:'full'},
         {path:'list', component:PaymentsListComponent},
         {path:'detail/:id', component:PaymentsDetailComponent},
       ]
