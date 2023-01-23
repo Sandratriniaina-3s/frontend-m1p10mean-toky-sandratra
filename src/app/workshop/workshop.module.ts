@@ -6,8 +6,11 @@ import { RepairsRequestListComponent } from './repairs-request-list/repairs-requ
 import { RepairsRequestDetailComponent } from './repairs-request-detail/repairs-request-detail.component';
 import { OperationsListComponent } from './operations-list/operations-list.component';
 import { WorkshopService } from './workshop.service';
-
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     RepairsRequestListComponent,
@@ -16,7 +19,15 @@ import { WorkshopService } from './workshop.service';
   ],
   imports: [
     CommonModule,
-    WorkshopRoutingModule
+    WorkshopRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatTableModule
   ],
   providers:[
     {
