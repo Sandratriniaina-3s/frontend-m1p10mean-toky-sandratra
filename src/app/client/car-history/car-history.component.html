@@ -1,1 +1,11 @@
-<p>car-history works!</p>
+<div class="container">
+    <div class="item" *ngFor="let history of carHistory" routerLink="/root/garage/repairs/list" >
+        <div class="text">
+           <p> Réparation du :{{history.arrivedAt | date : 'dd/MM/yyyy'}}</p>
+           <p>Cout: {{history.cost}} Ar</p>
+        </div>
+        <mat-icon class="mat-18" *ngIf="history.status === 'Arecuperer'" id="done">done_all</mat-icon>
+        <mat-icon class="mat-18" *ngIf="history.status !== 'Arecuperer'" id="pending">pending</mat-icon>
+        <hr>
+    </div>
+</div>

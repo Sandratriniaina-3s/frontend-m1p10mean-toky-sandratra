@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ClientRoutingModule } from './client-routing.module';
-import { CarsListComponent, DeleteCarDialog } from './cars-list/cars-list.component';
+import { CarHistoryDialog, CarsListComponent, DeleteCarDialog } from './cars-list/cars-list.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { ClientAccountComponent } from './client-account/client-account.component';
 import { RepairsListComponent } from './repairs-list/repairs-list.component';
@@ -27,7 +27,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RepairsDetailsComponent,
     RepairsFormComponent,
     CarHistoryComponent,
-    DeleteCarDialog
+    DeleteCarDialog,
+    CarHistoryDialog
   ],
   imports: [
     CommonModule,

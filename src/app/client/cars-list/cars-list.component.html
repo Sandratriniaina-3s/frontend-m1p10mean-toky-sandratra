@@ -61,7 +61,7 @@
         <p>{{car?.brand}}-{{car?.model}} </p>
     </div>
     <div class="card-actions">
-      <button mat-icon-button *ngIf="!isEditing" id="list"><mat-icon>list</mat-icon></button>
+      <button mat-icon-button *ngIf="!isEditing" (click)="openHistory(car._id)" id="list"><mat-icon>list</mat-icon></button>
       <button mat-icon-button *ngIf="!isEditing" (click)="edit(car) " id="edit"><mat-icon>edit</mat-icon></button>
       <button mat-icon-button *ngIf="!isEditing" (click)="onDelete(car._id) " id="delete"><mat-icon>delete</mat-icon></button>
     </div>

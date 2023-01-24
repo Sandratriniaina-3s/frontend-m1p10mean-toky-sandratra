@@ -9,10 +9,10 @@ export interface Operation{
 }
 
 export enum RepairStatus{
-    DEPOSITED = 'Déposé',
+    DEPOSITED = 'Depose',
     REPAIRING = 'En cours de reparation',
     TESTING = 'En cours de verification',
-    TO_BE_TAKEN = 'A recupérer'
+    TO_BE_TAKEN = 'Arecuperer'
 }
 
 export interface Repair{

@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { environment } from 'environments/environment.dev';
 import { Car, Criteria } from '../types/car.interface';
 import { ApiResponse } from '../types/shared.interface';
+import { Repair } from '../types/repairs.interface';
 @Injectable()
 
 export class ClientService {
@@ -32,6 +33,12 @@ export class ClientService {
           :this.http
                .post(`${environment.apiUrl}/cars`, car)
                .pipe(map((response:ApiResponse)=>response.data as Car))
+  }
+
+  getCarHistory(carId:string):Observable<Repair[]>{
+    return this.http
+                .get(`${environment.apiUrl}/repairs/car`, {params:{carId}})
+                .pipe(map((response:ApiResponse)=>response.data as Repair[]))
   }
   
 }

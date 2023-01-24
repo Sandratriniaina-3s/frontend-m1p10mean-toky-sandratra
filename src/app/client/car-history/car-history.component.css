@@ -1,0 +1,23 @@
+.container{
+    width: 40vw;
+}
+
+.item{
+    display: grid;
+    grid-template-columns: 90% 10%;
+    align-items: center;
+    border-bottom: 1px solid #d7d7d7;
+    padding: 10px;
+}
+
+.item:hover{
+    cursor: pointer;
+}
+
+#done{
+    color: rgb(50, 189, 28);
+}
+
+#pending{
+    color: rgb(33, 65, 208);
+}

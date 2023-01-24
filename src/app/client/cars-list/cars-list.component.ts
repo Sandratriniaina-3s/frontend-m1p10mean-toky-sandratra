@@ -1,9 +1,10 @@
-import { Component, OnInit,OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit,OnDestroy, Input, SimpleChanges, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY_CAR } from 'src/app/constants/car.constants';
 import { Car } from 'src/app/types/car.interface';
+import { Repair } from 'src/app/types/repairs.interface';
 import { SubSink } from 'subsink';
 import { DEFAULT_CRITERIA } from '../client.contants';
 import { ClientService } from '../client.service';
@@ -21,6 +22,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
   subs = new SubSink();
   searchTerm: string = '';
   currentCar!:Car;
+  carHistory!:Repair[];
   isEditing:boolean = false;
   isNew: boolean = false;
 
@@ -39,6 +41,15 @@ export class CarsListComponent implements OnInit, OnDestroy {
   loadCars(){
     this.subs.sink = this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
       this.cars = cars;
+    })
+  }
+
+  loadCarHistory(car:string){
+    return new Promise<void>((resolve)=>{
+      this.clientService.getCarHistory(car).subscribe((history)=>{
+        this.carHistory = history;
+        resolve()
+      })
     })
   }
 
@@ -91,6 +102,13 @@ export class CarsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    this.dialog.closeAll();
+  }
+
+  openHistory(car:string){
+    this.loadCarHistory(car).then(()=>{
+      this.dialog.open(CarHistoryDialog,{data:this.carHistory});
+    });
   }
 
   private initForm(car:Car){
@@ -110,4 +128,13 @@ export class CarsListComponent implements OnInit, OnDestroy {
 
 export class DeleteCarDialog{
 
+}
+
+@Component({
+  selector: 'car-history-dialog',
+  templateUrl: 'car-history-dialog.html',
+})
+
+export class CarHistoryDialog{
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Repair[]) {}
 }

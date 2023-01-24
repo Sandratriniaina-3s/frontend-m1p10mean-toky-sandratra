@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Repair } from 'src/app/types/repairs.interface';
 
 @Component({
   selector: 'app-car-history',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CarHistoryComponent implements OnInit {
 
   constructor() { }
+  @Input() carHistory:Repair[]=[];
 
   ngOnInit(): void {
   }
