@@ -19,8 +19,8 @@
                     <tr>
                         <th>No</th>
                         <th>Designation</th>
-                        <th>Cout</th>
-                        <th>Durée</th>
+                        <th>Cout(Ar)</th>
+                        <th>Durée(jours)</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -29,7 +29,8 @@
                         <ng-container *ngTemplateOutlet="editTemplate"> 
                         </ng-container>
                     </tr>
-                    <tr *ngFor="let operation of operations; let index">
+                    <tr *ngFor="let operation of operations; let i=index">
+                        <td>{{i + 1}}</td>
                         <ng-container 
                         *ngTemplateOutlet="operation._id === currentOperation?._id && isEditing? editTemplate : detailTemplate; context:{$implicit:operation}">
                         </ng-container>    
@@ -41,13 +42,13 @@
 </div>
 
 <ng-template #detailTemplate let-operation>
-    <td></td>
+    
     <td>{{operation.label}}</td>
     <td>{{operation.cost}} </td>
     <td>{{operation.duration}}</td>
-    <td>
-        <mat-icon class="mat-18" (click)="edit(operation)">edit</mat-icon>
-        <mat-icon class="mat-18" >delete</mat-icon>
+    <td class="actions">
+        <mat-icon class="mat-18" id="edit" (click)="edit(operation)">edit</mat-icon>
+        <mat-icon class="mat-18" id="delete" (click)="onDelete(operation._id)">delete</mat-icon>
     </td>
 </ng-template>
 
@@ -56,28 +57,25 @@
         <td></td>
         <td>
             <mat-form-field>
-                <mat-label>Designation</mat-label>
                 <input matInput type="text " #labelInput formControlName="label">
                 <mat-error> Champ requis</mat-error>
             </mat-form-field>
         </td>
         <td>
             <mat-form-field>
-                <mat-label>Cout</mat-label>
                 <input matInput type="number " #costInput formControlName="cost">
                 <mat-error> Champ requis</mat-error>
             </mat-form-field>
         </td>
         <td>
             <mat-form-field>
-                <mat-label>Durée</mat-label>
                 <input matInput type="text " #durationInput formControlName="duration">
                 <mat-error> Champ requis</mat-error>
             </mat-form-field>
         </td>
-        <td>
-            <mat-icon class="mat-18" (click)="saveOperation(form)">check</mat-icon>
-            <mat-icon class="mat-18" (click)="cancel()">close</mat-icon>
+        <td class="actions">
+            <mat-icon class="mat-18" id="done" (click)="saveOperation(form)">check</mat-icon>
+            <mat-icon class="mat-18" id="close" (click)="cancel()">close</mat-icon>
         </td>
     </ng-container>
 </ng-template>

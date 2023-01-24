@@ -13,6 +13,21 @@
     src: url('../../../assets/fonts/montserrat/Montserrat-Regular.ttf');
 }
 
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../../../assets/fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: Poppins-Medium;
+    src: url('../../../assets/fonts/poppins/Poppins-Medium.ttf');
+}
+
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('../../../assets/fonts/poppins/Poppins-Bold.ttf');
+}
+
 .container {
     width: 100%;
 }
@@ -57,6 +72,10 @@
     font-size: 30px;
 }
 
+.search-bar button mat-icon:hover {
+    cursor: pointer;
+}
+
 .add {
     display: flex;
     flex-direction: row;
@@ -90,7 +109,7 @@
 }
 
 .list table{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -106,7 +125,6 @@
 .list table tbody{
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
 .list table thead tr, 
@@ -116,24 +134,55 @@
 }
 
 .list table thead{
-    background-color: rebeccapurple;
+    background-color: #6675df;
+    font-family: Poppins-Bold;
+    color: #fff;
+}
+
+.list table tbody{
+    height: 50vh;
 }
 
 .list table thead tr th{
     height: 45px;
+    width: 12vw;
+    text-align: center;
 }
 
 .list table tbody tr{
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 1, 0.232);
-    margin: 10px 0;
+    margin: 5px 0;
+    font-family: Poppins-REgular;
 }
 .list table tbody tr td{
     height: 45px;
     background-color: #fff;
+    width: 12vw;
 }
 
 td,tr{
     text-align: center;
 }
 
+.actions mat-icon{
+    margin: 0 10px;
+}
+
+#edit,
+#done {
+    color: #26b46a;
+}
+
+#delete,
+#close {
+    color: #da0c3f;
+}
+
+::ng-deep .mat-mdc-form-field-bottom-align {
+    display: none !important;
+}
+
+::ng-deep .mdc-text-field{
+    background-color: unset;
+}

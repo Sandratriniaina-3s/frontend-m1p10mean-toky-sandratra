@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DEFAULT_CRITERIA } from 'src/app/client/client.contants';
 import { EMPTY_OPERATION } from 'src/app/constants/workshop.constants';
 import { Operation } from 'src/app/types/repairs.interface';
@@ -13,7 +15,12 @@ import { WorkshopService } from '../workshop.service';
 })
 export class OperationsListComponent implements OnInit {
 
-  constructor(private workshopService:WorkshopService, private formBuilder:FormBuilder) { }
+  constructor(
+    private workshopService:WorkshopService, 
+    private formBuilder:FormBuilder,  
+    private dialog: MatDialog, 
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.loadOperations();
@@ -33,7 +40,11 @@ export class OperationsListComponent implements OnInit {
     });
   }
 
-  search(){}
+  search(){
+    this.subs.sink = this.workshopService.getAllOperations({search: this.searchTerm}).subscribe((res)=>{
+      this.operations = res;
+    });
+  }
 
   private intiForm(operation:Operation){
     return this.formBuilder.group({
@@ -49,21 +60,21 @@ export class OperationsListComponent implements OnInit {
     this.isNew = false;
   }
 
-  // onDelete(operation : string):void{
-  //   const dialog = this.dialog.open(DeleteCarDialog);
-  //   dialog.afterClosed().subscribe(res =>{
-  //     if(res){
-  //       this.clientService.deleteCar(operation).subscribe(res=>{
-  //         this.cars = this.cars.filter(item => item._id !== operation);
-  //         this.snackBar.open('Suppression effectuée', undefined, {duration: 3000});
-  //       })
+  onDelete(operation : string):void{
+    const dialog = this.dialog.open(DeleteOperationDialog);
+    dialog.afterClosed().subscribe(res =>{
+      if(res){
+        this.workshopService.deleteOperation(operation).subscribe(res=>{
+          this.operations = this.operations.filter(item => item._id !== operation);
+          this.snackBar.open('Suppression effectuée', undefined, {duration: 3000});
+        })
 
-  //       setTimeout(()=>{
-  //         this.loadOperations();
-  //       },200)
-  //     }
-  //   })
-  // }
+        setTimeout(()=>{
+          this.loadOperations();
+        },200)
+      }
+    })
+  }
 
   saveOperation(form:any){
     const operation = form.value as Operation;
@@ -92,11 +103,11 @@ export class OperationsListComponent implements OnInit {
 }
 
 
-// @Component({
-//   selector: 'delete-car-dialog',
-//   templateUrl: 'delete-car-dialog.html',
-// })
+@Component({
+  selector: 'delete-operation-dialog',
+  templateUrl: 'delete-operation-dialog.html',
+})
 
-// export class DeleteCarDialog{
+export class DeleteOperationDialog{
 
-// }
+}

@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppInterceptorProvider } from './shared/interceptor/app.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent
