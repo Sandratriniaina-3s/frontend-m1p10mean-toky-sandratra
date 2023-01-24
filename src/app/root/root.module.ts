@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,9 @@ import { MatMenuModule } from '@angular/material/menu';
         MatToolbarModule,
         MatListModule,
         MatMenuModule
+    ],
+    providers:[
+        AuthenticationService
     ]
 })
 export class RootModule { }

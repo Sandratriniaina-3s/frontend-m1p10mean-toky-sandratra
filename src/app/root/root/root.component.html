@@ -10,7 +10,7 @@
             <span class="spacer"></span>
             <div class="profile" [matMenuTriggerFor]="menu">
                 <mat-icon class="profile-icon pointer">account_circle</mat-icon>
-                <span class="pointer">Username</span>
+                <span class="pointer" >{{ user?.login }}</span>
             </div>
 
             <mat-menu #menu="matMenu" xPosition="before">
