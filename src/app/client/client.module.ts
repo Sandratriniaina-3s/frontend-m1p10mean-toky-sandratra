@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { ClientRoutingModule } from './client-routing.module';
-import { CarsListComponent } from './cars-list/cars-list.component';
+import { CarsListComponent, DeleteCarDialog } from './cars-list/cars-list.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { ClientAccountComponent } from './client-account/client-account.component';
 import { RepairsListComponent } from './repairs-list/repairs-list.component';
@@ -13,6 +13,9 @@ import { ClientService } from './client.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { MatInputModule } from '@angular/material/input';
     RepairsDetailsComponent,
     RepairsFormComponent,
     CarHistoryComponent,
+    DeleteCarDialog
   ],
   imports: [
     CommonModule,
@@ -32,7 +36,10 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers:[
     {

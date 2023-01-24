@@ -1,5 +1,7 @@
 import { Component, OnInit,OnDestroy, Input, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EMPTY_CAR } from 'src/app/constants/car.constants';
 import { Car } from 'src/app/types/car.interface';
 import { SubSink } from 'subsink';
@@ -13,7 +15,7 @@ import { ClientService } from '../client.service';
 })
 export class CarsListComponent implements OnInit, OnDestroy {
 
-  constructor(private clientService: ClientService, private formBuilder: FormBuilder) { }
+  constructor(private clientService: ClientService, private formBuilder: FormBuilder, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   cars: Car[] = [];
   subs = new SubSink();
@@ -31,13 +33,13 @@ export class CarsListComponent implements OnInit, OnDestroy {
       this.form = this.initForm(this.currentCar);
     }
   }
-  
+
   form = this.initForm(EMPTY_CAR);
 
   loadCars(){
     this.subs.sink = this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
       this.cars = cars;
-    })  
+    })
   }
 
   search(): void{
@@ -47,12 +49,19 @@ export class CarsListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(car : string):void{
-    this.clientService.deleteCar(car).subscribe(res=>{
-      this.cars = this.cars.filter(item => item._id !== car);
+    const dialog = this.dialog.open(DeleteCarDialog);
+    dialog.afterClosed().subscribe(res =>{
+      if(res){
+        this.clientService.deleteCar(car).subscribe(res=>{
+          this.cars = this.cars.filter(item => item._id !== car);
+          this.snackBar.open('Suppression effectuée', undefined, {duration: 3000});
+        })
+
+        setTimeout(()=>{
+          this.loadCars();
+        },200)
+      }
     })
-    setTimeout(()=>{
-      this.loadCars();
-    },200)
   }
 
   edit(car:Car){
@@ -92,4 +101,13 @@ export class CarsListComponent implements OnInit, OnDestroy {
       registration:[car.registration, Validators.required]
     })
   }
+}
+
+@Component({
+  selector: 'delete-car-dialog',
+  templateUrl: 'delete-car-dialog.html',
+})
+
+export class DeleteCarDialog{
+
 }

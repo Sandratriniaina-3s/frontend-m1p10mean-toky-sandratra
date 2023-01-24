@@ -37,8 +37,8 @@
                         </div>
                     </form>
                     <div class="card-actions ">
-                        <mat-icon *ngIf="isEditing || isNew" id="done" (click)="saveCar(form)">done</mat-icon>
-                        <mat-icon *ngIf="isEditing || isNew" (click)="cancelEdit()" id="close">close</mat-icon>
+                      <button mat-icon-button *ngIf="isEditing || isNew" id="done" (click)="saveCar(form)"><mat-icon>done</mat-icon></button>
+                      <button mat-icon-button *ngIf="isEditing || isNew" (click)="cancelEdit()" id="close"><mat-icon>close</mat-icon></button>
                     </div>
                 </div>
             </div>
@@ -61,9 +61,9 @@
         <p>{{car?.brand}}-{{car?.model}} </p>
     </div>
     <div class="card-actions">
-        <mat-icon *ngIf="!isEditing" id="list">list</mat-icon>
-        <mat-icon *ngIf="!isEditing" (click)="edit(car) " id="edit">edit</mat-icon>
-        <mat-icon *ngIf="!isEditing" (click)="onDelete(car._id) " id="delete">delete</mat-icon>
+      <button mat-icon-button *ngIf="!isEditing" id="list"><mat-icon>list</mat-icon></button>
+      <button mat-icon-button *ngIf="!isEditing" (click)="edit(car) " id="edit"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button *ngIf="!isEditing" (click)="onDelete(car._id) " id="delete"><mat-icon>delete</mat-icon></button>
     </div>
 </ng-template>
 
@@ -90,8 +90,8 @@
             </div>
         </form>
         <div class="card-actions ">
-            <mat-icon *ngIf="isEditing || isNew" id="done" (click)="saveCar(form)">done</mat-icon>
-            <mat-icon *ngIf="isEditing || isNew" (click)="cancelEdit()" id="close">close</mat-icon>
+          <button mat-icon-button *ngIf="isEditing || isNew" id="done" (click)="saveCar(form)"><mat-icon>done</mat-icon></button>
+          <button mat-icon-button *ngIf="isEditing || isNew" (click)="cancelEdit()" id="close"><mat-icon>close</mat-icon></button>
         </div>
     </ng-container>
 </ng-template>
