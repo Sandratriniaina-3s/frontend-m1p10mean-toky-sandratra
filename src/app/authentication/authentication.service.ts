@@ -20,8 +20,13 @@ export class AuthenticationService {
                .pipe(map((response:ApiResponse)=>response.data as User))
   }
 
-  getUserByLoginAndPassword(userLogin:string, userPassword:string):Observable<User>{
-    return this.http.get(`${environment.apiUrl}/users/${userLogin}/${userPassword}`).pipe(map((response:ApiResponse) => response.data as User));
+  getUserByLoginAndPassword(user: User): Observable<ApiResponse> {
+    return this.http
+      .post(`${environment.apiUrl}/users/login`, user)
+      .pipe(map((res) => {
+        return res
+      }
+    ));
   }
 
   getUserById(userId:string):Observable<User>{

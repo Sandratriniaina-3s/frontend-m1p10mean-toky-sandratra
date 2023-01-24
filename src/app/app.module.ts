@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppInterceptorProvider } from './shared/interceptor/app.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AppInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

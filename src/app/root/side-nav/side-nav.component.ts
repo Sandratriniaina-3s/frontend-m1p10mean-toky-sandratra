@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from 'src/app/shared/service/token.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -7,10 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SideNavComponent {
 
-  isExpanded: boolean = true;
+  constructor(private tokenService: TokenService){}
 
-  //Responsable financier
-  //Responsable atelier
-  userRole = "Responsable financier"
+  isExpanded: boolean = true;
+  userRole = this.tokenService.getRole();
 
 }

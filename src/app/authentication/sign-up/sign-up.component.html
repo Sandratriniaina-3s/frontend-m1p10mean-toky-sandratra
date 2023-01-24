@@ -1,1 +1,51 @@
-<p>sign-up works!</p>
+<div class="login-form-flex">
+  <mat-card>
+    <div class="card-container">
+      <mat-card-title>
+        <h1> S'inscrire </h1>
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Nom</mat-label>
+            <input matInput formControlName="lastName" (input)="onLastNameInput()" placeholder="Nom">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Prenom</mat-label>
+            <input matInput formControlName="firstName" (input)="onFirstNameInput()" placeholder="Prenom">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" (input)="onEmailInput()" type="email" placeholder="pat@example.com">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Telephone</mat-label>
+            <input matInput formControlName="telephone" (input)="onTelephoneInput()" type="tel" placeholder="Telephone">
+          </mat-form-field>
+          <br>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Login</mat-label>
+            <input matInput formControlName="login" (input)="onLoginInput()" placeholder="Login">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (input)="onPasswordInput()" placeholder="Mot de passe">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="button-flex-container">
+          <button [ngClass]="'btn-register'" mat-raised-button color="primary" [disabled]="disableCheck()"
+            (click)="onValiderClick()"> Valider</button>
+        </div>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>

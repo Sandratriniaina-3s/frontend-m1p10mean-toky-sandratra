@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TokenService } from 'src/app/shared/service/token.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,12 @@ import { Component } from '@angular/core';
 })
 export class RootComponent {
   //isOpen:boolean = false;
-  constructor(){}
+  constructor(private tokenService: TokenService){}
   /*toggleMenu(){
     this.isOpen = !this.isOpen;
   }*/
 
   logOut(){
-    console.log("Logout");
+    this.tokenService.logout()
   }
 }

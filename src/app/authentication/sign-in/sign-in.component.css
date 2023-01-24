@@ -670,3 +670,11 @@ input.input100 {
     background: #333333;
     color: #fff;
 }
+
+/* ---------------------- */
+
+.sign-up:hover{
+  text-decoration: underline;
+  color: #6675df;
+  cursor: pointer;
+}
