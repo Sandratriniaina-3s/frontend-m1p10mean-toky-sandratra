@@ -1,4 +1,5 @@
 import { Car } from "./car.interface";
+import { PaymentStatus } from "./payments.interface";
 import { User } from "./user.interface";
 
 export interface Operation{
@@ -24,7 +25,16 @@ export interface Repair{
     arrivedAt:Date,
     finishedAt:Date,
     reparationBegin:Date,
+    paymentStatus?:PaymentStatus,
     note:string,
     reparationDuration: string,
     supervisor:string | User,
+}
+
+export interface DashboardData{
+    dailyTurnover: number,
+    monthlyTurnover:number,
+    averageRepairTime:string,
+    onGoingRepairs:number,
+    unpaidRepairs:number,
 }

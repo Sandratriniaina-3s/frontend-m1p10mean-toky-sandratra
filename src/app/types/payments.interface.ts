@@ -6,12 +6,13 @@ export interface Payment{
     _id:string,
     repair: string | Repair,
     amount: number,
+    createdAt: Date,
 }
 
 export enum PaymentStatus{
-    UNPAID = "Non payé",
-    PARTIALLY_PAID = "Partiellement payé",
-    PAID = "Payé",
+    UNPAID = "Non paye",
+    PARTIALLY_PAID = "Partiellement paye",
+    PAID = "Paye",
 }
 
 export interface Bill{

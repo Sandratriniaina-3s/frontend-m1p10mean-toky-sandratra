@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardData } from 'src/app/types/repairs.interface';
+import { SubSink } from 'subsink';
+import { FinanceService } from '../finance.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private financeService:FinanceService) { }
 
+  private subs = new SubSink();
+  dashboardData !: DashboardData;
+  
   ngOnInit(): void {
+    this.loadDashboardData();
   }
 
+  loadDashboardData(){
+    this.subs.sink = this.financeService.getDashboardData().subscribe((data)=>{
+      this.dashboardData = data;
+    })
+  }
 }

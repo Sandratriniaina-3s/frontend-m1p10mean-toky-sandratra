@@ -8,6 +8,7 @@ import { PaymentsFormComponent } from './payments-form/payments-form.component';
 import { PaymentsDetailComponent } from './payments-detail/payments-detail.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { FinanceService } from './finance.service';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FinanceService } from './finance.service';
   ],
   imports: [
     CommonModule,
-    FinanceManagerRoutingModule
+    FinanceManagerRoutingModule,
+    MatIconModule
   ],
   providers:[
     {

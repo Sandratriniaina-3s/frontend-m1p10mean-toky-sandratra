@@ -1,1 +1,58 @@
-<p>dashboard works!</p>
+
+<div class="container">
+    <div class="card-container">
+        <div class="card">
+            <div class="icon blue">
+                <mat-icon class="mat-18 ">account_balance</mat-icon>
+            </div>
+            <div class="content">
+                <span class="title">CA du jour</span>
+                <span class="value">{{dashboardData.dailyTurnover}}</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon blue">
+                <mat-icon class="mat-18">account_balance</mat-icon>
+            </div>
+            <div class="content ">
+                <span class="title">CA du mois</span>
+                <span class="value">{{dashboardData.monthlyTurnover}}</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon blue">
+                <mat-icon class="mat-18">build</mat-icon>
+            </div>
+            <div class="content ">
+                <span class="title">Durée de réparation moyen</span>
+                <span class="value">{{dashboardData.averageRepairTime}}</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon blue">
+                <mat-icon class="mat-18">build</mat-icon>
+            </div>
+            <div class="content">
+                <span class="title">Reparations en cours</span>
+                <span class="value">{{dashboardData.onGoingRepairs}}</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon blue">
+                <mat-icon class="mat-18">credit_card</mat-icon>
+            </div>
+            <div class="content">
+                <span class="title">Reparations non payé</span>
+                <span class="value">{{dashboardData.unpaidRepairs}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="benefit-container">
+        <div class="benefit-list">
+            <p>liste benefice</p>
+        </div>
+        <div class="benefit-form">
+            <p>formulaire benefice</p>
+        </div>
+    </div>
+</div>
