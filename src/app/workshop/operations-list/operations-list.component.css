@@ -197,3 +197,7 @@ td,tr{
 .hide{
   display: none;
 }
+
+.show{
+  display: flow-root;
+}

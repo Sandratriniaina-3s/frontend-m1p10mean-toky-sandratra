@@ -105,6 +105,7 @@ export class RepairsFormComponent implements OnInit, OnDestroy {
 
     this.repairSub = this.workshopService.saveRepair(this.repairRequest).subscribe(
       res =>{
+        console.log(res)
         this.dialogRef.close({data: res});
       }
     )

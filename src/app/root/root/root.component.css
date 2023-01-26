@@ -97,8 +97,8 @@
     background-color: rgba(128, 128, 128, 0.178);
 }
 
-::ng-deep .cdk-overlay-pane {
-    margin-top: 17px;
+::ng-deep .mat-mdc-menu-panel.mat-mdc-menu-panel {
+  margin-top: 17px;
 }
 
 footer {

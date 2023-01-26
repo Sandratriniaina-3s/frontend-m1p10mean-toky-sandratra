@@ -2,7 +2,7 @@
   <mat-spinner></mat-spinner>
 </div>
 
-<div class="container" *ngIf="!isLoading">
+<div class="container" [ngClass]="{'hide':isLoading, 'show':!isLoading}">
 
   <mat-card>
     <mat-card-header>
