@@ -24,6 +24,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatListModule } from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CastToCarPipe } from '../pipes/cast-to-car.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     RepairsFormComponent,
     CarHistoryComponent,
     DeleteCarDialog,
-    CarHistoryDialog
+    CarHistoryDialog,
+    CastToCarPipe
   ],
   imports: [
     CommonModule,
