@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Repair} from 'src/app/types/repairs.interface';
 import { UserRole } from 'src/app/types/user.interface';
 import { WorkshopService } from 'src/app/workshop/workshop.service';
+import { RepairsDetailsComponent } from '../repairs-details/repairs-details.component';
 import { RepairsFormComponent } from '../repairs-form/repairs-form.component';
 
 @Component({
@@ -83,6 +84,14 @@ export class RepairsListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.table.renderRows();
       }
     })
+  }
+
+  onViewClik(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "50%";
+    dialogConfig.height = "auto";
+    dialogConfig.data = { repair: this.element } ;
+    this.dialog.open(RepairsDetailsComponent, dialogConfig);
   }
 
   onMouseOver(row:any){

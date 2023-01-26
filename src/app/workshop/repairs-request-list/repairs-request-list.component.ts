@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
+import { RepairsDetailsComponent } from 'src/app/client/repairs-details/repairs-details.component';
 import { RepairsFormComponent } from 'src/app/client/repairs-form/repairs-form.component';
 import { Repair } from 'src/app/types/repairs.interface';
 import { UserRole } from 'src/app/types/user.interface';
@@ -94,6 +95,14 @@ export class RepairsRequestListComponent implements OnInit, OnDestroy {
   onMouseLeave(row: any){
     row.actions = false;
     this.element = null;
+  }
+
+  onViewClik(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "50%";
+    dialogConfig.height = "auto";
+    dialogConfig.data = { repair: this.element } ;
+    this.dialog.open(RepairsDetailsComponent, dialogConfig);
   }
 
 }

@@ -1,1 +1,36 @@
-<p>repairs-details works!</p>
+<h1 mat-dialog-title class="dialog-title">
+  {{repair.car.brand}} {{repair.car.model}} ({{repair.car.registration}})
+  <span class="btn-close" mat-dialog-close>X</span>
+</h1>
+<mat-dialog-content>
+      <div class="left">
+        <p><span class="title">Superviseur</span> : {{repair.supervisor.fullName}}</p>
+        <p><span class="title">Statut</span> : {{repair.status}}</p>
+        <p><span class="title">Arrivé</span> : {{repair.arrivedAt | date: 'dd/MM/YYYY'}}</p>
+        <p><span class="title">Status de paiement</span> : {{repair.paymentStatus}}</p>
+      </div>
+      <div class="right">
+        <p><span class="title">Debut de reparation</span> : {{repair.reparationBegin | date: 'dd/MM/YYYY'}} </p>
+        <p><span class="title">Fin de reparation</span> : {{repair.finishedAt | date: 'dd/MM/YYYY'}} </p>
+        <p><span class="title">Durée de reparation</span> : {{repair.reparationDuration}} </p>
+        <p><span class="title">Note</span> : {{repair.note}} </p>
+      </div>
+    <table class="data-table">
+      <tr>
+        <th>Designation</th>
+        <th>Montant</th>
+      </tr>
+      <tr *ngFor="let operation of operationList">
+        <td>{{operation.label}}</td>
+        <td>{{operation.cost}}</td>
+      </tr>
+      <tfoot>
+        <tr>
+          <th scope="row">TOTAL</th>
+          <th>{{repair.cost}} Ar</th>
+        </tr>
+      </tfoot>
+    </table>
+</mat-dialog-content>
+
+
