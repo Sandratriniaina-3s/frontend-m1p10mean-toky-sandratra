@@ -5,7 +5,9 @@ import { environment } from 'environments/environment.dev';
 import { Car, Criteria } from '../types/car.interface';
 import { ApiResponse } from '../types/shared.interface';
 import { Repair } from '../types/repairs.interface';
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class ClientService {
 
@@ -40,5 +42,5 @@ export class ClientService {
                 .get(`${environment.apiUrl}/repairs/car`, {params:{carId}})
                 .pipe(map((response:ApiResponse)=>response.data as Repair[]))
   }
-  
+
 }

@@ -108,3 +108,12 @@ footer {
     text-align: center;
     width: 100%;
 }
+
+.content {
+  position: absolute;
+  width: 100%;
+  margin-bottom: 3px;
+  height: 83%;
+  max-height: 83%;
+  overflow: auto;
+}

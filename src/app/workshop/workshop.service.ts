@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment.dev';
 import { map, Observable } from 'rxjs';
 import { Criteria } from '../types/car.interface';
-import { Operation } from '../types/repairs.interface';
+import { Operation, Repair } from '../types/repairs.interface';
 import { ApiResponse } from '../types/shared.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
+
 export class WorkshopService {
 
   constructor(private http:HttpClient) { }
@@ -34,4 +37,23 @@ export class WorkshopService {
                .post(`${environment.apiUrl}/operations`, operation)
                .pipe(map((response:ApiResponse)=>response.data as Operation))
   }
+
+    /* REPAIRS */
+
+    saveRepair(repair: Repair):Observable<Repair>{
+      return repair._id
+            ? this.http
+                  .put(`${environment.apiUrl}/repairs/${repair._id}`, repair)
+                  .pipe(map((response:ApiResponse)=>response.data as Repair))
+            :this.http
+                 .post(`${environment.apiUrl}/repairs`, repair)
+                 .pipe(map((response:ApiResponse)=>response.data as Repair))
+    }
+
+    getAllRepairs(): Observable<Repair[]>{
+      return this.http
+                .get(`${environment.apiUrl}/repairs`)
+                .pipe(map((response: ApiResponse)=> response.data as Repair[]));
+    }
+
 }

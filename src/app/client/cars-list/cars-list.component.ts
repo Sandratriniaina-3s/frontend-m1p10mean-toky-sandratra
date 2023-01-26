@@ -2,7 +2,9 @@ import { Component, OnInit,OnDestroy, Input, SimpleChanges, Inject } from '@angu
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
 import { EMPTY_CAR } from 'src/app/constants/car.constants';
+import { TokenService } from 'src/app/shared/service/token.service';
 import { Car } from 'src/app/types/car.interface';
 import { Repair } from 'src/app/types/repairs.interface';
 import { SubSink } from 'subsink';
@@ -16,7 +18,7 @@ import { ClientService } from '../client.service';
 })
 export class CarsListComponent implements OnInit, OnDestroy {
 
-  constructor(private clientService: ClientService, private formBuilder: FormBuilder, private dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(private clientService: ClientService,private tokenService: TokenService, private authService: AuthenticationService, private formBuilder: FormBuilder, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   cars: Car[] = [];
   subs = new SubSink();
@@ -87,7 +89,10 @@ export class CarsListComponent implements OnInit, OnDestroy {
 
   saveCar(form:any){
     const car = form.value as Car;
-    this.clientService.saveCar(car).subscribe((res)=>{});
+    this.authService.getUserById(this.tokenService.getId() as string).subscribe((client)=>{
+      car.client = client;
+      this.clientService.saveCar(car).subscribe((res)=>{});
+    })
     this.isEditing = false;
     this.isNew = false;
     setTimeout(()=>{

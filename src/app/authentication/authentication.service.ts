@@ -5,7 +5,9 @@ import { map, Observable } from 'rxjs';
 import { ApiResponse } from '../types/shared.interface';
 import { User } from '../types/user.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
