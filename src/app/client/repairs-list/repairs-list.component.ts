@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { RepairsFormComponent } from '../repairs-form/repairs-form.component';
   templateUrl: './repairs-list.component.html',
   styleUrls: ['./repairs-list.component.css']
 })
-export class RepairsListComponent implements OnInit, OnDestroy {
+export class RepairsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   repairRequest = {} as Repair;
   dataSource!: MatTableDataSource<any>;
@@ -26,6 +26,10 @@ export class RepairsListComponent implements OnInit, OnDestroy {
   table!: { renderRows: () => void; };
 
   constructor(private workshopService: WorkshopService, private dialog: MatDialog) { }
+
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   ngOnDestroy(): void {
     this.repairSub.unsubscribe();
@@ -84,13 +88,11 @@ export class RepairsListComponent implements OnInit, OnDestroy {
   onMouseOver(row:any){
     row.actions = true;
     this.element = row;
-    console.log(this.element)
   }
 
   onMouseLeave(row: any){
     row.actions = false;
     this.element = null;
-    console.log(this.element)
   }
 
 }

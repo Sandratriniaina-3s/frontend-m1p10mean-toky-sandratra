@@ -142,6 +142,10 @@ width: 20%;
   display: none;
 }
 
+.show{
+  display: flow-root;
+}
+
 
 
 

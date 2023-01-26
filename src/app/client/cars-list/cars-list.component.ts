@@ -93,13 +93,14 @@ export class CarsListComponent implements OnInit, OnDestroy {
     const car = form.value as Car;
     this.authService.getUserById(this.tokenService.getId() as string).subscribe((client)=>{
       car.client = client;
-      this.clientService.saveCar(car).subscribe((res)=>{});
+      this.clientService.saveCar(car).subscribe((res)=>{
+        this.isEditing = false;
+        this.isNew = false;
+        setTimeout(()=>{
+          this.loadCars();
+        },100);
+      });
     })
-    this.isEditing = false;
-    this.isNew = false;
-    setTimeout(()=>{
-      this.loadCars();
-    },100);
   }
 
   create(){

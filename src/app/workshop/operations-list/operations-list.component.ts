@@ -81,12 +81,13 @@ export class OperationsListComponent implements OnInit {
 
   saveOperation(form:any){
     const operation = form.value as Operation;
-    this.workshopService.saveOperation(operation).subscribe((res)=>{});
-    this.isEditing = false;
-    this.isNew = false;
-    setTimeout(()=>{
-      this.loadOperations();
-    })
+    this.workshopService.saveOperation(operation).subscribe((res)=>{
+      this.isEditing = false;
+      this.isNew = false;
+      setTimeout(()=>{
+        this.loadOperations();
+      })
+    });
   }
 
   edit(operation:Operation){
