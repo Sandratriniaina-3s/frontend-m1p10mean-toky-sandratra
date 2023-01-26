@@ -15,10 +15,12 @@ import { WorkshopService } from '../workshop.service';
 })
 export class OperationsListComponent implements OnInit {
 
+  isLoading = true ;
+
   constructor(
-    private workshopService:WorkshopService, 
-    private formBuilder:FormBuilder,  
-    private dialog: MatDialog, 
+    private workshopService:WorkshopService,
+    private formBuilder:FormBuilder,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) { }
 
@@ -37,6 +39,7 @@ export class OperationsListComponent implements OnInit {
   private loadOperations(){
     this.subs.sink = this.workshopService.getAllOperations(DEFAULT_CRITERIA).subscribe((res)=>{
       this.operations = res;
+      this.isLoading = false;
     });
   }
 

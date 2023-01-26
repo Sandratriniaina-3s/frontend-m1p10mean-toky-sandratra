@@ -20,6 +20,7 @@ export class RepairsListComponent implements OnInit, OnDestroy {
   element = null;
   searchTerm: string = '';
   repairSub : Subscription = new Subscription();
+  isLoading = true ;
 
   @ViewChild('table', { static: true, read: MatTable })
   table!: { renderRows: () => void; };
@@ -40,6 +41,7 @@ export class RepairsListComponent implements OnInit, OnDestroy {
       for(var repair of this.dataSource.data){
         this.separateDateAndTime(repair);
       }
+      this.isLoading = false;
     })
   }
 

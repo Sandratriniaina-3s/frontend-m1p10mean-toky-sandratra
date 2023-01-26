@@ -27,6 +27,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
   carHistory!:Repair[];
   isEditing:boolean = false;
   isNew: boolean = false;
+  isLoading = true ;
 
   ngOnInit(): void {
     this.loadCars();
@@ -43,6 +44,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
   loadCars(){
     this.subs.sink = this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
       this.cars = cars;
+      this.isLoading = false;
     })
   }
 

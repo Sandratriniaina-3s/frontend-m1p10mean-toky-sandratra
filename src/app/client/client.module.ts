@@ -23,6 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatListModule } from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     MatChipsModule,
     MatDatepickerModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ],
   providers:[
     {

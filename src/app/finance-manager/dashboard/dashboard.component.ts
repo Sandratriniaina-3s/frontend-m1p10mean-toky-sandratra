@@ -14,7 +14,8 @@ export class DashboardComponent implements OnInit {
 
   private subs = new SubSink();
   dashboardData !: DashboardData;
-  
+  isLoading = true ;
+
   ngOnInit(): void {
     this.loadDashboardData();
   }
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   loadDashboardData(){
     this.subs.sink = this.financeService.getDashboardData().subscribe((data)=>{
       this.dashboardData = data;
+      this.isLoading = false;
     })
   }
 }

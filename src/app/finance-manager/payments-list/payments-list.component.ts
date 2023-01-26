@@ -18,6 +18,7 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
   element = null;
   searchTerm: string = '';
   paymentSub : Subscription = new Subscription();
+  isLoading = true ;
 
   @ViewChild('table', { static: true, read: MatTable })
   table!: { renderRows: () => void; };
@@ -35,6 +36,7 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
     this.paymentSub = this.financeService.getAllPayments().subscribe((res)=>{
       this.dataSource = new MatTableDataSource(res);
       console.log(res)
+      this.isLoading = false;
     })
   }
 

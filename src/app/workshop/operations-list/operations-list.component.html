@@ -1,4 +1,8 @@
-<div class="container">
+<div class="loading-container" [ngClass]="{'hide':!isLoading}">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="container" *ngIf="!isLoading">
     <div class="list-layout">
         <div class="search-bar">
             <mat-form-field appearance="outline">
@@ -26,14 +30,14 @@
                 </thead>
                 <tbody>
                     <tr *ngIf="isNew">
-                        <ng-container *ngTemplateOutlet="editTemplate"> 
+                        <ng-container *ngTemplateOutlet="editTemplate">
                         </ng-container>
                     </tr>
                     <tr *ngFor="let operation of operations; let i=index">
                         <td>{{i + 1}}</td>
-                        <ng-container 
+                        <ng-container
                         *ngTemplateOutlet="operation._id === currentOperation?._id && isEditing? editTemplate : detailTemplate; context:{$implicit:operation}">
-                        </ng-container>    
+                        </ng-container>
                     </tr>
                 </tbody>
             </table>
@@ -42,7 +46,7 @@
 </div>
 
 <ng-template #detailTemplate let-operation>
-    
+
     <td>{{operation.label}}</td>
     <td>{{operation.cost}} </td>
     <td>{{operation.duration}}</td>

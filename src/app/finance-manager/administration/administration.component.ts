@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdministrationComponent implements OnInit {
 
+  isLoading = true ;
+
   constructor() { }
 
   ngOnInit(): void {
+    //this.isLoading = false;
   }
 
 }

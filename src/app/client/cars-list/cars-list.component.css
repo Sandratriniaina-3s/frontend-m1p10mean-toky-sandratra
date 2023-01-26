@@ -187,3 +187,14 @@
 #list {
     color: #2e2e2e;
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hide{
+  display: none;
+}

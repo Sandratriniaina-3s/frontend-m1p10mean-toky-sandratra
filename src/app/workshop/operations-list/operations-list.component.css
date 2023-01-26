@@ -117,7 +117,7 @@
     justify-content: center;
 }
 
-.list table thead, 
+.list table thead,
 .list table tbody{
     width: 100%;
 }
@@ -127,7 +127,7 @@
     flex-direction: column;
 }
 
-.list table thead tr, 
+.list table thead tr,
 .list table tbody tr{
     width: 100%;
     text-align: left;
@@ -185,4 +185,15 @@ td,tr{
 
 ::ng-deep .mdc-text-field{
     background-color: unset;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hide{
+  display: none;
 }

@@ -136,6 +136,17 @@ width: 20%;
   height: 37px;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hide{
+  display: none;
+}
+
 
 
 
