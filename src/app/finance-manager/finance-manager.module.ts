@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -43,6 +44,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatDatepickerModule,
     MatProgressSpinnerModule
   ],
   providers:[

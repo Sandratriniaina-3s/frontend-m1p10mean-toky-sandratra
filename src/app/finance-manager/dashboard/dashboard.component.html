@@ -52,10 +52,57 @@
     </div>
     <div class="benefit-container">
         <div class="benefit-list">
-            <p>liste benefice</p>
+            <div class="bloc-title">
+                <h3 class="title">Historique des benefices</h3>
+            </div>
+            <div class="item" *ngFor="let profit of profits"> 
+                Benefice du : {{profit.date}} - Montant : {{profit.amount}}Ar
+                <mat-icon (click)="viewDetail(profit)">description</mat-icon>
+            </div>
         </div>
-        <div class="benefit-form">
-            <p>formulaire benefice</p>
+        <div class="benefit-form" >
+            <div class="bloc-title">
+                <h3 class="title">Calcul des benefices</h3>
+            </div>
+            <div class="add" (click)="createProfit()" *ngIf="!isNew ">
+                <mat-icon>add</mat-icon>
+                <h3>Ajouter le benefice du mois</h3>
+            </div>
+            <div class="inputs" *ngIf="isNew || isDetail">
+                <div class="title">Periode : {{period}}</div>
+                <form [formGroup]="form">
+                    <mat-form-field>
+                        <mat-label>Salaires</mat-label>
+                        <input matInput type="text " #salaryInput formControlName="salary">
+                        <mat-error>Champ requis</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Local(loyer, entretient,...)</mat-label>
+                        <input matInput type="text " #loanInput formControlName="loan">
+                        <mat-error> Champ requis</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Achats(materiels, ...)</mat-label>
+                        <input matInput type="text " #purchaseInput formControlName="purchases">
+                        <mat-error> Champ requis</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Autres</mat-label>
+                        <input matInput type="text " #othersInput formControlName="others">
+                        <mat-error> Champ requis</mat-error>
+                    </mat-form-field>
+                </form>
+                <div class="total">
+                    <p class="title">Total benefice : <span class="value">{{getProfitAmount()}}Ar</span> </p>
+                </div>
+                <div class="card-actions ">
+                  <button mat-icon-button  id="done" (click)="saveProfit(form)" id="done" *ngIf="isNew" ><mat-icon>done</mat-icon></button>
+                  <button mat-icon-button  id="close" (click)="cancel()" id="close"><mat-icon>close</mat-icon></button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
+

@@ -98,7 +98,7 @@
     font-family: Poppins-Medium;
 }
 
-.add h3 {
+.add h3:hover {
     cursor: pointer;
 }
 
