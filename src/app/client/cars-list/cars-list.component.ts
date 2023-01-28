@@ -87,6 +87,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
 
   cancelEdit(){
     this.isEditing = false;
+    this.isNew = false;
   }
 
   saveCar(form:any){
