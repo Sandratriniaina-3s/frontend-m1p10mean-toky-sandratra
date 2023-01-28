@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/guards/authentication.guard';
 import { CarHistoryComponent } from './car-history/car-history.component';
 import { CarsDetailsComponent } from './cars-details/cars-details.component';
 import { CarsListComponent } from './cars-list/cars-list.component';
@@ -13,21 +14,21 @@ const routes: Routes = [
       path :'cars',
       children:[
         {path:'', redirectTo:'list',pathMatch:'full'},
-        {path:'list', component:CarsListComponent,data:{title : 'Voitures'}},
-        {path:'detail/:carId', component:CarsDetailsComponent,data:{title : 'Voiture'}},
-        {path:'history/:carId', component:CarHistoryComponent,data:{title:'Historique'}}
+        {path:'list',canActivate:[AuthGuard], component:CarsListComponent,data:{title : 'Voitures'}},
+        {path:'detail/:carId',canActivate:[AuthGuard], component:CarsDetailsComponent,data:{title : 'Voiture'}},
+        {path:'history/:carId',canActivate:[AuthGuard], component:CarHistoryComponent,data:{title:'Historique'}}
       ]
     },
     {
       path :'repairs',
       children:[
         {path:'', redirectTo:'list',pathMatch:'full'},
-        {path:'list', component:RepairsListComponent,data:{title : 'Voitures'}},
-        {path:'detail/:repairId', component:RepairsDetailsComponent,data:{title : 'Voiture'}},
+        {path:'list', component:RepairsListComponent,canActivate:[AuthGuard],data:{title : 'Voitures'}},
+        {path:'detail/:repairId',canActivate:[AuthGuard], component:RepairsDetailsComponent,data:{title : 'Voiture'}},
       ]
     },
     {
-      path:'profil', component:ClientAccountComponent, data:{title:'Mon profile'}
+      path:'profil', component:ClientAccountComponent,canActivate:[AuthGuard], data:{title:'Mon profile'}
     }
 ];
 

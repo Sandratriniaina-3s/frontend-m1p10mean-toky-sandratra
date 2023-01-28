@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppInterceptorProvider } from './shared/interceptor/app.interceptor';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AuthGuard } from 'src/guards/authentication.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [AppInterceptorProvider],
+  providers: [AppInterceptorProvider, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
