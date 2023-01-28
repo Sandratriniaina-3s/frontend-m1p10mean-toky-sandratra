@@ -11,4 +11,5 @@ export interface Car{
 
 export interface Criteria{
     search:string,
+    client?:string,
 }

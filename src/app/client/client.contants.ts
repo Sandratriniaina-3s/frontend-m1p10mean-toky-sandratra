@@ -1,3 +1,6 @@
-export const DEFAULT_CRITERIA = {
-    search:''
+import { Criteria } from "../types/car.interface";
+
+export const DEFAULT_CRITERIA:Criteria = {
+    search:'',
+    client:''
 }

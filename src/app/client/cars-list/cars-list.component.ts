@@ -42,7 +42,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
   form = this.initForm(EMPTY_CAR);
 
   loadCars(){
-    this.subs.sink = this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
+    this.subs.sink = this.clientService.getAllCars({...DEFAULT_CRITERIA, client:this.tokenService.getId() as string}).subscribe((cars)=>{
       this.cars = cars;
       this.isLoading = false;
     })
@@ -58,7 +58,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
   }
 
   search(): void{
-    this.subs.sink = this.clientService.getAllCars({...DEFAULT_CRITERIA, search:this.searchTerm}).subscribe((cars)=>{
+    this.subs.sink = this.clientService.getAllCars({client:this.tokenService.getId() as string, search:this.searchTerm}).subscribe((cars)=>{
       this.cars = cars;
     })
   }
@@ -92,7 +92,7 @@ export class CarsListComponent implements OnInit, OnDestroy {
   saveCar(form:any){
     const car = form.value as Car;
     this.authService.getUserById(this.tokenService.getId() as string).subscribe((client)=>{
-      car.client = client;
+      car.client = client._id;
       this.clientService.saveCar(car).subscribe((res)=>{
         this.isEditing = false;
         this.isNew = false;
