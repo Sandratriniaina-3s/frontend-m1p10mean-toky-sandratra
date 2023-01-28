@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FinanceManagerRoutingModule } from './finance-manager-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaymentsListComponent } from './payments-list/payments-list.component';
-import { PaymentsFormComponent } from './payments-form/payments-form.component';
+import { PaymentsFormComponent, ReceiptDialog } from './payments-form/payments-form.component';
 import { PaymentsDetailComponent } from './payments-detail/payments-detail.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { FinanceService } from './finance.service';
@@ -28,7 +28,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     PaymentsDetailComponent,
     PaymentsFormComponent,
     PaymentsDetailComponent,
-    AdministrationComponent
+    AdministrationComponent,
+    ReceiptDialog
   ],
   imports: [
     CommonModule,

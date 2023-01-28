@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment.dev';
 import { map, Observable } from 'rxjs';
-import { Payment } from '../types/payments.interface';
+import { Payment, Receipt } from '../types/payments.interface';
 import { Profit } from '../types/profit.interface';
-import { DashboardData } from '../types/repairs.interface';
+import { DashboardData, Repair } from '../types/repairs.interface';
 import { ApiResponse } from '../types/shared.interface';
 
 @Injectable({
@@ -40,8 +40,18 @@ export class FinanceService {
     return this.http.get(`${environment.apiUrl}/payments/${paymentId}`).pipe(map((response:ApiResponse) => response.data as Payment));
   }
 
+  getPaymentByRepair(repairId:string):Observable<Payment>{
+    return this.http.get(`${environment.apiUrl}/payments/repair/${repairId}`).pipe(map((response:ApiResponse) => response.data as Payment));
+  }
+
   deletePayment(paymentId:string):Observable<void>{
     return this.http.delete(`${environment.apiUrl}/payments/${paymentId}`).pipe(map(() => {}));
+  }
+
+  /**RECEIPT */
+
+  getPaimentReceipt(paymendId:string):Observable<Receipt>{
+    return this.http.get(`${environment.apiUrl}/payments/receipt/${paymendId}`).pipe(map((response:ApiResponse)=>response.data as Receipt))
   }
 
   /** PROFIT */

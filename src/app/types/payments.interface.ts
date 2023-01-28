@@ -15,11 +15,18 @@ export enum PaymentStatus{
     PAID = "Paye",
 }
 
-export interface Bill{
+export interface Receipt{
     _id:any,
     date:Date,
-    repair: string | Repair,
+    payment: string | Payment,
     car:string | Car,
     client: string | User,
     totalAmount:number,
+}
+
+export const EMPTY_PAYMENT : Payment= {
+  _id:'',
+  repair:'',
+  amount:0,
+  createdAt:new Date(),
 }
