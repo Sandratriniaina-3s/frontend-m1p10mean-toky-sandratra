@@ -104,9 +104,15 @@
 footer {
     position: fixed;
     bottom: 0px;
-    background-color: rebeccapurple;
     text-align: center;
     width: 100%;
+    background-color: #6675DF;
+    font-family: Montserrat-Regular;
+    color:#fff;
+}
+
+footer p{
+  margin: unset;
 }
 
 .content {
