@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
       this.isLoading = false;
     })
   }
-  
+
   loadProfits(){
     this.subs.sink = this.financeService.getAllProfits().subscribe((data)=>{
       this.profits = data;
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
       const expenses = Number(this.form.value.loan as number) + Number(this.form.value.others as number) + Number( this.form.value.salary as number) + Number(this.form.value.purchases as number);
       return this.dashboardData.monthlyTurnover - expenses;
   }
-  
+
   saveProfit(form:any){
     const profit = form.value as Profit;
     this.financeService.saveProfit({...profit, createdAt:new Date(), date:this.period, amount:this.getProfitAmount()}).subscribe((res)=>{});
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
     this.initForm(profit);
     this.form.disable();
   }
-  
+
   cancel(){
     this.isNew=false;
     this.isDetail=false;
