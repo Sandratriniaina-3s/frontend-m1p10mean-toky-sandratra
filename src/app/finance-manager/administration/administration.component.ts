@@ -73,6 +73,7 @@ export class AdministrationComponent implements OnInit {
     dialog.afterClosed().subscribe((res:any) =>{
       if(res){
         this.subs.sink = this.authenticationService.deleteUser(userId).subscribe((res)=>{});
+        this.users = this.users.filter(item => item._id !== userId);
         this.snackBar.open('Suppression effectuée', undefined, {duration: 3000});
         setTimeout(()=>{
           this.loadUsers();
