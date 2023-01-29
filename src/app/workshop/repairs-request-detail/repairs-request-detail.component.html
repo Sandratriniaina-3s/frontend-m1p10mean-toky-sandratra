@@ -13,6 +13,23 @@
           </div>
       </mat-card>
     </div>
+    <div class="payments">
+      <div class="inputs">
+       <h3>Effectuer un paiment</h3>
+       <form [formGroup]="form">
+         <mat-form-field>
+             <mat-label>Montant</mat-label>
+             <input matInput type="number" #amountInput [(ngModel)]="repair.cost" formControlName="amount">
+             <mat-error>Champ requis</mat-error>
+         </mat-form-field>
+       </form>
+       <button mat-raised-button color="primary" (click)="onPay(form)">Payer</button>
+     </div>
+     <div class="list" *ngIf="repair.paymentStatus === 'Paye'">
+       <h3>Paiement effectué le :{{payment.createdAt}}</h3>
+       <button mat-raised-button color="primary">Voir la facture</button>
+     </div>
+    </div>
   </div>
   <hr style="width:1px;text-align:center;margin-left:0;margin-right: 0;">
   <div class="right" style="float: right;width: 40%;">

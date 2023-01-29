@@ -38,3 +38,9 @@ export interface DashboardData{
     onGoingRepairs:number,
     unpaidRepairs:number,
 }
+
+export interface MailData{
+  clientName:string,
+  clientMail:string,
+  carRegistration:string,
+}

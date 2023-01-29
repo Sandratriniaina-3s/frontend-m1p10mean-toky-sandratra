@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment.dev';
 import { map, Observable } from 'rxjs';
-import { Criteria } from '../types/car.interface';
-import { Operation, Repair } from '../types/repairs.interface';
+import { Car, Criteria } from '../types/car.interface';
+import { MailData, Operation, Repair } from '../types/repairs.interface';
 import { ApiResponse } from '../types/shared.interface';
 
 @Injectable({
@@ -85,5 +85,9 @@ export class WorkshopService {
                 .pipe(map((response: ApiResponse)=> response.data));
     }
 
+    /**MAIL */
+    sendMail(data:MailData):Observable<MailData>{
+      return this.http.post(`${environment.apiUrl}/repairs/mail`,data).pipe(map((response:ApiResponse)=>response.data as MailData))
+    }
 
 }
