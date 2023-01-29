@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaymentsListComponent } from './payments-list/payments-list.component';
 import { PaymentsFormComponent, ReceiptDialog } from './payments-form/payments-form.component';
 import { PaymentsDetailComponent } from './payments-detail/payments-detail.component';
-import { AdministrationComponent } from './administration/administration.component';
+import { AdministrationComponent, DeleteDialog } from './administration/administration.component';
 import { FinanceService } from './finance.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     PaymentsFormComponent,
     PaymentsDetailComponent,
     AdministrationComponent,
-    ReceiptDialog
+    ReceiptDialog,
+    DeleteDialog
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers:[
     {

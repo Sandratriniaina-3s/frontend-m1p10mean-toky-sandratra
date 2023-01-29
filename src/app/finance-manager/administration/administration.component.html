@@ -1,3 +1,82 @@
 <div class="loading-container" [ngClass]="{'hide':!isLoading}">
   <mat-spinner></mat-spinner>
 </div>
+
+<div class="container">
+  <div class="list">
+    <h3 class="title">Utilisateurs</h3>
+    <div class="add" (click)="create()">
+      <mat-icon>add</mat-icon>
+      <h3>Ajouter un utilisateur</h3>
+    </div>
+    <div class="items">
+      <div class="item" *ngFor="let user of users">
+        <p>{{user.firstName}} {{user.lastName}} - {{user.role}}</p>
+        <div class="actions">
+          <mat-icon class="mat-18" (click)="edit(user._id)" id="list">list</mat-icon>
+          <mat-icon class="mat-18" (click)="onDelete(user._id)" id="delete">delete</mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="detail">
+    <h3 class="title">Detail</h3>
+    <form [formGroup]="form" *ngIf="form && (isNew || isEditing)">
+      <mat-form-field>
+        <mat-label>Nom</mat-label>
+        <input matInput type="text " #firstNameInput formControlName="firstName">
+        <mat-error> Champ requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field >
+          <mat-label>Prenom</mat-label>
+          <input matInput="" type="text " #lastNameInput formControlName="lastName">
+          <mat-error> Champ requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="email" #emailInput formControlName="email">
+          <mat-error> Champ requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Telephone</mat-label>
+        <input matInput type="text" #telephoneInput formControlName="telephone">
+        <mat-error> Champ requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+          <mat-label>Login</mat-label>
+          <input matInput="" type="text " #loginInput formControlName="login">
+          <mat-error> Champ requis</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" [style.width.%]="100">
+        <mat-label>Fonction</mat-label>
+        <mat-select formControlName="role">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Mot de passe">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="isEditing">
+        <mat-label>Nouveau mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="newPassword" placeholder="Nouveau mot de passe">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="save(form)">Sauvegarder</button>
+  </form>
+  </div>
+</div>

@@ -15,3 +15,16 @@ export interface User{
     password:string,
     role: UserRole
 }
+
+
+export const EMPTY_USER : User = {
+  _id:'',
+  firstName:'',
+  lastName:'',
+  fullName:'',
+  email:'',
+  telephone:'',
+  login:'',
+  password:'',
+  role:UserRole.RESPONABLE_ATELIER,
+}

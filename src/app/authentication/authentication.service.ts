@@ -35,5 +35,13 @@ export class AuthenticationService {
     return this.http.get(`${environment.apiUrl}/users/${userId}`).pipe(map((response:ApiResponse) => response.data as User));
   }
 
+  getAllUsers():Observable<User[]>{
+    return this.http.get(`${environment.apiUrl}/users`).pipe(map((response: ApiResponse)=> response.data as User[]))
+  }
+
+
+  deleteUser(userId:string):Observable<void>{
+    return this.http.delete(`${environment.apiUrl}/users/${userId}`).pipe(map(() => {}));
+  }
 }
 
