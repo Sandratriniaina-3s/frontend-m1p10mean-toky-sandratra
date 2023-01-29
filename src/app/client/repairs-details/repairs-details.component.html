@@ -1,35 +1,49 @@
 <h1 mat-dialog-title class="dialog-title">
-  {{repair.car.brand}} {{repair.car.model}} ({{repair.car.registration}})
+  {{repair.car.brand}} - {{repair.car.model}} ({{repair.car.registration}})
   <span class="btn-close" mat-dialog-close>X</span>
 </h1>
 <mat-dialog-content>
       <div class="left">
-        <p><span class="title">Superviseur</span> : {{repair.supervisor.fullName}}</p>
-        <p><span class="title">Statut</span> : {{repair.status}}</p>
-        <p><span class="title">Arrivé</span> : {{repair.arrivedAt | date: 'dd/MM/YYYY'}}</p>
-        <p><span class="title">Status de paiement</span> : {{repair.paymentStatus}}</p>
+        <p>Superviseur : {{repair.supervisor.fullName}}</p>
+        <p>Statut : {{repair.status}}</p>
+        <p>Arrivé : {{repair.arrivedAt | date: 'dd/MM/YYYY'}}</p>
+        <p *ngIf="role == 'Client'">Statut de paiement : {{repair.paymentStatus}}</p>
+        <p>Client : {{repair.car.client.fullName}}</p>
       </div>
       <div class="right">
-        <p><span class="title">Debut de reparation</span> : {{repair.reparationBegin | date: 'dd/MM/YYYY'}} </p>
-        <p><span class="title">Fin de reparation</span> : {{repair.finishedAt | date: 'dd/MM/YYYY'}} </p>
-        <p><span class="title">Durée de reparation</span> : {{repair.reparationDuration}} </p>
-        <p><span class="title">Note</span> : {{repair.note}} </p>
+        <p>Debut de reparation : {{repair.reparationBegin | date: 'dd/MM/YYYY'}} </p>
+        <p>Fin de reparation : {{repair.finishedAt | date: 'dd/MM/YYYY'}} </p>
+        <p>Durée de reparation : {{repair.reparationDuration}} </p>
+        <p>Note : {{repair.note}} </p>
       </div>
-    <table class="data-table">
+    <table class="data-table" *ngIf="role == 'Client'">
       <tr>
+        <th style="width: 10px;"></th>
         <th>Designation</th>
         <th>Montant</th>
       </tr>
       <tr *ngFor="let operation of operationList">
+        <td> <mat-checkbox color="primary" [(ngModel)]="operation.done" disabled></mat-checkbox> </td>
         <td>{{operation.label}}</td>
-        <td>{{operation.cost}}</td>
+        <td >{{operation.cost}}</td>
       </tr>
       <tfoot>
         <tr>
-          <th scope="row">TOTAL</th>
+          <th></th>
+          <th scope="row" rowspan="2">TOTAL</th>
           <th>{{repair.cost}} Ar</th>
         </tr>
       </tfoot>
+    </table>
+    <table class="data-table" *ngIf="role == 'Responsable atelier'">
+      <tr>
+        <th style="width: 10px;"></th>
+        <th>Designation</th>
+      </tr>
+      <tr *ngFor="let operation of operationList">
+        <td> <mat-checkbox color="primary" [(ngModel)]="operation.done" disabled></mat-checkbox> </td>
+        <td>{{operation.label}}</td>
+      </tr>
     </table>
 </mat-dialog-content>
 

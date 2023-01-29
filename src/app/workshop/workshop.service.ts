@@ -56,4 +56,34 @@ export class WorkshopService {
                 .pipe(map((response: ApiResponse)=> response.data as Repair[]));
     }
 
+    saveRepairAndStart(repair: Repair): Observable<any>{
+      return this.http.put(`${environment.apiUrl}/repairs/${repair._id}/operation`,repair)
+                .pipe(map((response: ApiResponse)=> response.data));
+    }
+
+    getRepairstatusDeposited(status: string): Observable<Repair[]>{
+      return this.http
+                .get(`${environment.apiUrl}/repairs/status/${status}`)
+                .pipe(map((response: ApiResponse)=> response.data as Repair[]));
+    }
+
+    getRepairBySupervisor(id: string): Observable<Repair[]>{
+      return this.http
+                .get(`${environment.apiUrl}/repairs/supervisor/${id}`)
+                .pipe(map((response: ApiResponse)=> response.data as Repair[]));
+    }
+
+    getRepairsTerminatedBySupervisor(id: string): Observable<any>{
+      return this.http
+                .get(`${environment.apiUrl}/repairs/finished/supervisor/${id}`)
+                .pipe(map((response: ApiResponse)=> response.data));
+    }
+
+    getRepairsDetailById(id: string): Observable<any>{
+      return this.http
+                .get(`${environment.apiUrl}/repairs/detail/${id}`)
+                .pipe(map((response: ApiResponse)=> response.data));
+    }
+
+
 }

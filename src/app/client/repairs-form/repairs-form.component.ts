@@ -23,19 +23,20 @@ export class RepairsFormComponent implements OnInit, OnDestroy {
   repairRequest = {} as Repair;
   carsList: Car[] = [];
   operationsList: Operation[] = [];
-  operationsForm: FormControl = new FormControl('');
-  carsForm: FormControl = new FormControl('');
-  noteForm: FormControl = new FormControl('');
+  operationsForm!: FormControl;
+  carsForm!: FormControl;
+  noteForm!: FormControl ;
+
   btnSaveState : boolean = true;
   repairSub: Subscription = new Subscription();
 
+  repairAtelier: any;
   carInfo: string = "";
   selectedOperationLength = 0;
   formGroup = new FormGroup({
     operationForm: new FormControl(),
     costForm: new FormControl(),
     durationForm: new FormControl(),
-    arrivedDateForm: new FormControl(),
     repairBeginForm: new FormControl(),
     repairEndForm: new FormControl(),
     noteForm: new FormControl()
@@ -52,11 +53,12 @@ export class RepairsFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     switch (this.data.role) {
       case UserRole.CLIENT:
+        this.initClientForm();
         this.loadAllCars();
         this.loadAllOPerations();
         break;
       case UserRole.RESPONABLE_ATELIER:
-        this.loadRespoAteData();
+        this.loadRespoAtelierData();
         break;
       case UserRole.RESPONABLE_FINANCIER:
         this.loadRepairs();
@@ -70,9 +72,15 @@ export class RepairsFormComponent implements OnInit, OnDestroy {
   }
 
   loadAllCars(){
-    this.clientService.getAllCars(DEFAULT_CRITERIA).subscribe((cars)=>{
+    this.clientService.getAllCars({...DEFAULT_CRITERIA, client:this.tokeService.getId() as string}).subscribe((cars)=>{
       this.carsList = cars;
     })
+  }
+
+  initClientForm(){
+    this.carsForm = new FormControl('');
+    this.noteForm = new FormControl('');
+    this.operationsForm = new FormControl('');
   }
 
   loadAllOPerations(){
@@ -84,103 +92,125 @@ export class RepairsFormComponent implements OnInit, OnDestroy {
   totalAmountOperation(operationList: any):number{
     let cost = 0 ;
     for (var operation of operationList) {
-      cost = cost + parseInt(operation.cost)
+      cost = cost + parseInt(operation.cost);
     }
     return cost;
   }
 
-  onSaveClick(){
-    this.repairRequest.car = this.carsForm.value;
-    this.repairRequest.status = RepairStatus.DEPOSITED;
+  addFormValueToRequest(){
     this.repairRequest.arrivedAt = new Date();
+    this.repairRequest.car = this.carsForm.value._id;
+    this.repairRequest.status = RepairStatus.DEPOSITED;
     if(this.operationsForm.value.length > 0) {
-      this.repairRequest.operations = [];
       this.repairRequest.cost = this.totalAmountOperation(this.operationsForm.value);
-      this.repairRequest.operations = this.operationsForm.value;
+      this.repairRequest.operations = [];
+      this.calculateDurationAndExtractId(this.repairRequest);
     }
-
+    else{
+      this.repairRequest.cost = 0;
+      this.repairRequest.reparationDuration = "0 jour";
+    }
     if(this.noteForm.value != ""){
       this.repairRequest.note = this.noteForm.value;
     }
+  }
 
+  calculateDurationAndExtractId(repair: any){
+    let duration = 0 ;
+    this.operationsForm.value.forEach((element:Operation) => {
+      duration = duration + parseInt(element.duration.toString());
+      repair.operations.push(element._id);
+    });
+    repair.reparationDuration = duration +" jour(s)";
+  }
+
+  onSaveClick(){
+    this.addFormValueToRequest();
     this.repairSub = this.workshopService.saveRepair(this.repairRequest).subscribe(
       res =>{
-        console.log(res)
+        res.car = this.carsForm.value;
+        res.operations = this.operationsForm.value;
         this.dialogRef.close({data: res});
       }
     )
-
   }
 
-  disableCheck(){
-    if(this.carsForm.value == ""){
-      this.btnSaveState = true;
+  disableCheck(user: string):boolean{
+    if(user == "client"){
+      if(this.carsForm.value == ""){
+        this.btnSaveState = true;
+      }
+      else{
+        this.btnSaveState = false;
+      }
     }
     else{
-      this.btnSaveState = false;
+      if(this.operationsForm.value.length > 0){
+        this.btnSaveState = false;
+      }
+      else{
+        this.btnSaveState = true;
+      }
     }
     return this.btnSaveState;
   }
 
   /* RESPONSABLE ATELIER */
-  loadRespoAteData(){
-    this.repairRequest = this.data.request;
-    let car =  this.repairRequest.car as Car;
-    this.carInfo = car.brand + " - " + car.model + " ( " + car.registration + " )" ;
-    this.setDataToForm();
-    if(this.repairRequest.operations == undefined){
+  loadRespoAtelierData(){
+    this.repairAtelier = this.data.request;
+    if(this.repairAtelier.operations == undefined || this.repairAtelier.operations.length == 0){
+      this.initRespoAtelierForm();
       this.loadAllOPerations();
     }
     else{
-      this.operationsList = this.repairRequest.operations as Operation[];
+      this.operationsList = this.repairAtelier.operations;
+      this.noteForm =  new FormControl(this.repairAtelier.note);
     }
   }
 
-  setDataToForm(){
-    this.formGroup.controls['noteForm'].setValue(this.repairRequest.note);
-    this.formGroup.controls['arrivedDateForm'].setValue(Reflect.get(this.repairRequest, 'date') + "  /  " + Reflect.get(this.repairRequest, 'time'));
-    if(this.repairRequest.reparationDuration != undefined){
-      this.formGroup.controls['durationForm'].setValue(this.repairRequest.reparationDuration);
-    }
-    if(this.repairRequest.reparationBegin != undefined){
-      this.formGroup.controls['repairBeginForm'].setValue(this.repairRequest.reparationBegin);
-    }
-    if(this.repairRequest.finishedAt != undefined){
-      this.formGroup.controls['repairEndForm'].setValue(this.repairRequest.finishedAt);
+  initRespoAtelierForm(){
+    this.noteForm = new FormControl(this.repairAtelier.note);
+    this.operationsForm = new FormControl('');
+  }
+
+  addFormValueToRepairRequest(){
+    this.repairAtelier.cost = this.totalAmountOperation(this.operationsForm.value);
+    this.repairAtelier.operations = [];
+    this.calculateDurationAndExtractId(this.repairAtelier);
+    this.repairAtelier.note = this.noteForm.value;
+  }
+
+  onConfirmClick(value:string){
+    switch(value){
+      case "add":
+        this.addOperation();
+        break;
+      case "take":
+        this.takeRepairTask();
+        break;
     }
   }
 
-  setFormValueToRepairRequest(){
-    this.repairRequest.reparationBegin = this.formGroup.controls['repairBeginForm'].value;
-    this.repairRequest.finishedAt = this.formGroup.controls['repairEndForm'].value;
-    this.repairRequest.reparationDuration = this.formGroup.controls['durationForm'].value;
-    if(this.formGroup.controls['noteForm'].value !== ""){
-      this.repairRequest.note = this.formGroup.controls['noteForm'].value;
-    }
-    if(this.formGroup.controls['operationForm'].value != null){
-      this.repairRequest.operations = this.formGroup.controls['operationForm'].value;
-    }
-  }
-
-  onConfirmClick(){
-    this.setFormValueToRepairRequest();
-
-    let time = Reflect.get(this.repairRequest, 'time');
-    let date = Reflect.get(this.repairRequest, 'date');
-    Reflect.deleteProperty(this.repairRequest, 'time');
-    Reflect.deleteProperty(this.repairRequest, 'date');
-    Reflect.deleteProperty(this.repairRequest, 'actions');
-
-    this.authServive.getUserById(this.tokeService.getId() as string).subscribe( user => {
-      this.repairRequest.supervisor = user;
-      this.repairSub = this.workshopService.saveRepair(this.repairRequest).subscribe( res =>{
-        Reflect.set(res, 'time', time);
-        Reflect.set(res, 'date', date);
-        Reflect.set(res, 'actions', false);
-        this.dialogRef.close({data: res});
-      })
+  addOperation(){
+    this.addFormValueToRepairRequest();
+    let car =  this.repairAtelier.car;
+   this.repairSub = this.workshopService.saveRepair(this.repairAtelier).subscribe(res => {
+      res.operations = this.operationsForm.value as Operation[];
+      res.car = car ;
+      this.dialogRef.close({ data: res });
     })
+  }
 
+  takeRepairTask(){
+    this.repairAtelier.supervisor = this.tokeService.getId() as string;
+    this.repairAtelier.status = RepairStatus.REPAIRING;
+    this.repairAtelier.reparationBegin = new Date();
+    this.repairAtelier.operations.forEach((element:any) => {
+        Reflect.set(element, 'done', false);
+    });
+    this.repairSub = this.workshopService.saveRepairAndStart(this.repairAtelier).subscribe(res => {
+      this.dialogRef.close({ data: res });
+    })
   }
 
   onSelectionChange(){

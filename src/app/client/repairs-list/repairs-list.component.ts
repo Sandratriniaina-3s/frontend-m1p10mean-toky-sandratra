@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { RepairsFormComponent } from '../repairs-form/repairs-form.component';
   templateUrl: './repairs-list.component.html',
   styleUrls: ['./repairs-list.component.css']
 })
-export class RepairsListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class RepairsListComponent implements OnInit, OnDestroy {
 
   repairRequest = {} as Repair;
   dataSource!: MatTableDataSource<any>;
@@ -28,9 +28,6 @@ export class RepairsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private workshopService: WorkshopService, private dialog: MatDialog) { }
 
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
   ngOnDestroy(): void {
     this.repairSub.unsubscribe();
@@ -40,10 +37,10 @@ export class RepairsListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loadRepairs();
   }
 
-  loadRepairs(){
-    this.repairSub = this.workshopService.getAllRepairs().subscribe((res)=>{
+  loadRepairs() {
+    this.repairSub = this.workshopService.getAllRepairs().subscribe((res) => {
       this.dataSource = new MatTableDataSource(res);
-      for(var repair of this.dataSource.data){
+      for (var repair of this.dataSource.data) {
         this.separateDateAndTime(repair);
       }
       this.isLoading = false;
@@ -90,13 +87,15 @@ export class RepairsListComponent implements OnInit, OnDestroy, AfterViewInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "50%";
     dialogConfig.height = "auto";
-    dialogConfig.data = { repair: this.element } ;
+    dialogConfig.data = { repair: this.element, role: UserRole.CLIENT } ;
     this.dialog.open(RepairsDetailsComponent, dialogConfig);
   }
 
   onMouseOver(row:any){
-    row.actions = true;
-    this.element = row;
+    if(row.supervisor !== undefined){
+      row.actions = true;
+      this.element = row;
+    }
   }
 
   onMouseLeave(row: any){

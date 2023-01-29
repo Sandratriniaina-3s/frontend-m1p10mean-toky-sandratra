@@ -8,6 +8,15 @@
   padding: 8px;
 }
 
+.dialog-title{
+  background: #3f51b5;
+  color: white;
+}
+
+.mat-typography h1 {
+  margin: 0;
+}
+
 .data-table th {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -17,7 +26,7 @@
   font-weight: 500;
 }
 
-.data-table tr:nth-child(even){color: rgba(0, 0, 0, 0.753);}
+.data-table tr:nth-child(even){color: rgba(0, 0, 0, 0.795);}
 
 .data-table tfoot tr th{
   background-color: #f2f2f2;;
@@ -31,21 +40,20 @@
   float: right;
 }
 
-.title{
-  color: black;
-  text-decoration: underline;
+p{
+  color: rgba(0, 0, 0, 0.932);
 }
 
 .btn-close {
   float: right;
-  background-color: rgba(255, 0, 0, 0.562);
+  background-color: rgba(255, 0, 0, 0.692);
   color: white;
   font-size: medium;
-  padding: 8px;
+  padding: 13px;
 }
 
 .btn-close:hover{
   cursor: pointer;
-  background-color: rgba(255, 0, 0, 0.767);
+  background-color: rgba(255, 0, 0, 0.925);
   font-weight: bold;
 }

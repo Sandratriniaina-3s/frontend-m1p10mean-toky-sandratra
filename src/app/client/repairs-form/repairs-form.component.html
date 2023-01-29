@@ -1,7 +1,8 @@
 <ng-container *ngIf="data.role == 'Client'">
-  <h1 mat-dialog-title class="title">DEMANDE DE REPARATION</h1>
+  <h1 mat-dialog-title class="title">Demande de reparation</h1>
   <mat-dialog-content>
-    <p> <mat-form-field appearance="fill" [style.width.%]="100">
+    <div class="margin-top">
+      <p> <mat-form-field appearance="fill" [style.width.%]="100">
         <mat-label>Voiture</mat-label>
         <mat-select required [formControl]="carsForm">
           <mat-option *ngFor="let car of carsList" [value]="car">
@@ -22,139 +23,88 @@
             {{operationsForm.value.length}} </span></mat-hint>
       </mat-form-field>
     </p>
-    <p>
+    <p class="margin-top">
       <mat-form-field appearance="fill" [style.width.%]="100">
         <mat-label>Note</mat-label>
         <textarea matInput [formControl]="noteForm"></textarea>
       </mat-form-field>
     </p>
+    </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-flat-button color="warn" mat-dialog-close>Annuler</button>
-    <button mat-flat-button color="primary" (click)="onSaveClick()" [disabled]="disableCheck()">Valider</button>
+    <button mat-stroked-button mat-dialog-close>Annuler</button>
+    <button mat-flat-button color="primary" (click)="onSaveClick()" [disabled]="disableCheck('client')">Valider</button>
   </mat-dialog-actions>
 </ng-container>
 
-<ng-container *ngIf="data.role == 'Responsable atelier'">
-  <h1 mat-dialog-title class="title">{{carInfo}}</h1>
+<ng-container *ngIf="data.role == 'Responsable atelier' && repairAtelier.operations.length == 0" >
+  <h1 mat-dialog-title class="title">Demande de reparation</h1>
   <mat-dialog-content>
-    <!--content-with-operation-->
-    <div *ngIf="repairRequest.operations != undefined">
-      <form [formGroup]="formGroup">
-        <div class="left">
-          <p class="field-container">
-            <mat-form-field appearance="fill" [style.width.%]="43">
-              <mat-label>Date depot</mat-label>
-              <input matInput formControlName="arrivedDateForm" readonly>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="field-margin" [style.width.%]="43">
-              <mat-label>Durée reparation</mat-label>
-              <input matInput formControlName="durationForm" required>
-            </mat-form-field>
-          </p>
-          <p class="field-container">
-            <mat-form-field appearance="fill" [style.width.%]="43">
-              <mat-label>Debut reparation</mat-label>
-              <input matInput [matDatepicker]="beginPicker" formControlName="repairBeginForm">
-              <mat-hint>MM/JJ/AAAA</mat-hint>
-              <mat-datepicker-toggle matIconSuffix [for]="beginPicker"></mat-datepicker-toggle>
-              <mat-datepicker #beginPicker></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="field-margin" [style.width.%]="43">
-              <mat-label>Fin reparation</mat-label>
-              <input matInput [matDatepicker]="endPicker" formControlName="repairEndForm">
-              <mat-hint>MM/JJ/AAAA</mat-hint>
-              <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
-              <mat-datepicker #endPicker></mat-datepicker>
-            </mat-form-field>
-          </p>
-          <p>
-            <mat-form-field appearance="fill" [style.width.%]="100">
-              <mat-label>Note</mat-label>
-              <textarea matInput formControlName="noteForm"></textarea>
-            </mat-form-field>
-          </p>
-        </div>
-        <div class="right field-margin">
-          <table class="customTable">
-            <thead>
-                <tr>
-                    <th colspan="2">Liste d'operation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let operation of operationsList">
-                    <td  colspan="2">- {{operation.label}}</td>
-                </tr>
-            </tbody>
-            <tfoot>
-              <tr>
-                  <th>Montant</th>
-                  <td>{{repairRequest.cost}} Ar</td>
-              </tr>
-          </tfoot>
-        </table>
-
-        </div>
-      </form>
-    </div>
-    <!--content-with-operation-->
-    <div *ngIf="repairRequest.operations == undefined">
-      <form [formGroup]="formGroup">
-        <p class="field-container">
-          <mat-form-field appearance="fill" [style.width.%]="43">
+    <div class="margin-top">
+        <p class="form-spacer">
+          <mat-form-field appearance="fill" [style.width.%]="40">
+            <mat-label>Marque voiture</mat-label>
+            <input matInput [value]="repairAtelier.car.brand" readonly>
+          </mat-form-field>
+          <mat-form-field appearance="fill" [style.width.%]="40">
+            <mat-label>Modèle voiture</mat-label>
+            <input matInput [value]="repairAtelier.car.model" readonly>
+          </mat-form-field>
+        </p>
+        <p class="margin-top">
+          <mat-form-field appearance="fill" [style.width.%]="100">
             <mat-label>Operation(s)</mat-label>
-            <mat-select multiple="true" formControlName="operationForm" (selectionChange)="onSelectionChange()">
-              <mat-option *ngFor="let operation of operationsList" [value]="operation"  >
+            <mat-select multiple="true" [formControl]="operationsForm">
+              <mat-option *ngFor="let operation of operationsList" [value]="operation">
                 {{operation.label}}
               </mat-option>
             </mat-select>
-            <mat-hint *ngIf="selectedOperationLength > 0 "> <span class="count"> Nombre d'operation :
-              {{selectedOperationLength}} </span></mat-hint>
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="field-margin" [style.width.%]="43">
-            <mat-label>Montant total</mat-label>
-            <input matInput formControlName="costForm" readonly>
+            <mat-hint *ngIf="operationsForm.value.length > 0 "> <span class="count"> Nombre d'operation :
+                {{operationsForm.value.length}} </span></mat-hint>
           </mat-form-field>
         </p>
-        <p class="field-container">
-          <mat-form-field appearance="fill" [style.width.%]="43">
-            <mat-label>Date depot</mat-label>
-            <input matInput formControlName="arrivedDateForm" readonly>
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="field-margin" [style.width.%]="43">
-            <mat-label>Durée reparation</mat-label>
-            <input matInput formControlName="durationForm" required>
-          </mat-form-field>
-        </p>
-        <p class="field-container">
-          <mat-form-field appearance="fill" [style.width.%]="43">
-            <mat-label>Debut reparation</mat-label>
-            <input matInput [matDatepicker]="beginPicker" formControlName="repairBeginForm">
-            <mat-hint>MM/JJ/AAAA</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="beginPicker"></mat-datepicker-toggle>
-            <mat-datepicker #beginPicker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field appearance="fill" class="field-margin" [style.width.%]="43">
-            <mat-label>Fin reparation</mat-label>
-            <input matInput [matDatepicker]="endPicker" formControlName="repairEndForm">
-            <mat-hint>MM/JJ/AAAA</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
-            <mat-datepicker #endPicker></mat-datepicker>
-          </mat-form-field>
-        </p>
-        <p>
+        <p class="margin-top">
           <mat-form-field appearance="fill" [style.width.%]="100">
             <mat-label>Note</mat-label>
-            <textarea matInput formControlName="noteForm"></textarea>
+            <textarea matInput [formControl]="noteForm"></textarea>
           </mat-form-field>
         </p>
-      </form>
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-flat-button color="warn" mat-dialog-close>Annuler</button>
-    <button mat-flat-button color="primary" (click)="onConfirmClick()">Valider</button>
+    <button mat-stroked-button mat-dialog-close>Annuler</button>
+    <button mat-flat-button color="primary" (click)="onConfirmClick('add')" [disabled]="disableCheck('atelier')">Enregistrer</button>
+  </mat-dialog-actions>
+</ng-container>
+
+<ng-container *ngIf="data.role == 'Responsable atelier' && repairAtelier.operations.length > 0">
+  <h1 mat-dialog-title class="title">Demande de reparation</h1>
+  <mat-dialog-content>
+      <p class="color-black">Immatriculation : {{repairAtelier.car.registration}}</p>
+      <p class="color-black">Marque voiture : {{repairAtelier.car.brand}}</p>
+      <p class="color-black">Modele voiture : {{repairAtelier.car.model}}</p>
+        <table class="customTable">
+          <thead>
+              <tr>
+                  <th colspan="2">Liste d'operation</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let operation of operationsList">
+                  <td  colspan="2">- {{operation.label}}</td>
+              </tr>
+          </tbody>
+      </table>
+      <p class="margin-top">
+        <mat-form-field appearance="fill" [style.width.%]="100">
+          <mat-label>Note</mat-label>
+          <textarea matInput [formControl]="noteForm"></textarea>
+        </mat-form-field>
+      </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-stroked-button mat-dialog-close>Annuler</button>
+    <button mat-flat-button color="primary" (click)="onConfirmClick('take')">Prendre en charge</button>
   </mat-dialog-actions>
 </ng-container>
 
