@@ -16,7 +16,7 @@ export class AppInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log(request);
+    //console.log(request);
 
     const token = this.tokenService.getToken();
 
@@ -26,10 +26,10 @@ export class AppInterceptor implements HttpInterceptor {
           Authorization: 'Bearer ' + token
         }
       })
-      console.log(clone)
+      //console.log(clone)
       return next.handle(clone).pipe(
         catchError(error => {
-          console.log(error);
+          //console.log(error);
           if(error.status === 401){
             this.tokenService.logout();
           }

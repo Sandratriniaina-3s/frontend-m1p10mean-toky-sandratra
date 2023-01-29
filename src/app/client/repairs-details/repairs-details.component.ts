@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Operation, Repair } from 'src/app/types/repairs.interface';
+import { Subscription } from 'rxjs';
+import { WorkshopService } from 'src/app/workshop/workshop.service';
 
 @Component({
   selector: 'app-repairs-details',
@@ -9,17 +10,25 @@ import { Operation, Repair } from 'src/app/types/repairs.interface';
 })
 export class RepairsDetailsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private workshopService: WorkshopService) { }
+
   repair :any
-  operationList: Operation[] = []
+  operationList: any
+  detailSub = new Subscription();
+  role: string = "";
 
   ngOnInit(): void {
-    this.loadClientData();
+    this.loadData();
   }
 
-  loadClientData(){
-    this.operationList = this.data.repair.operations;
-    this.repair = this.data.repair;
+  loadData(){
+    this.detailSub = this.workshopService.getRepairsDetailById(this.data.repair._id).subscribe(res => {
+      if(res.length !== 0){
+        this.role = this.data.role;
+        this.operationList = res[0].operations;
+        this.repair = res[0];
+      }
+    })
   }
 
 
