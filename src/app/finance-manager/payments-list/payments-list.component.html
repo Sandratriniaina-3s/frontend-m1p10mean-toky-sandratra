@@ -11,10 +11,6 @@
         <button mat-flat-button class="btn-search" (click)="onSearchClick()" [disabled]="disableCheck()">
           <mat-icon>search</mat-icon>
         </button>
-        <button mat-flat-button color="primary" class="btn-add" (click)="onAddClick()">
-          <span class="btn-add-role-name"></span>
-          <mat-icon>add</mat-icon>
-        </button>
       </div>
 
       <div class="search-bar-container mat-elevation-z3">
@@ -55,6 +51,6 @@
   <td>{{repair.cost}}</td>
   <td>{{repair.operations.length}}</td>
   <td class="actions">
-      <mat-icon class="mat-18" id="pay" (click)="onAddClick()" >money</mat-icon>
+      <mat-icon class="mat-18" id="pay" (click)="onAddClick(repair._id)" >money</mat-icon>
   </td>
 </ng-template>

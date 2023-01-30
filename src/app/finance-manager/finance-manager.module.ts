@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FinanceManagerRoutingModule } from './finance-manager-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PaymentsListComponent } from './payments-list/payments-list.component';
+import { PaymentDialog, PaymentsListComponent } from './payments-list/payments-list.component';
 import { PaymentsFormComponent, ReceiptDialog } from './payments-form/payments-form.component';
 import { PaymentsDetailComponent } from './payments-detail/payments-detail.component';
 import { AdministrationComponent, DeleteDialog } from './administration/administration.component';
@@ -31,7 +31,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     PaymentsDetailComponent,
     AdministrationComponent,
     ReceiptDialog,
-    DeleteDialog
+    DeleteDialog,
+    PaymentDialog
   ],
   imports: [
     CommonModule,

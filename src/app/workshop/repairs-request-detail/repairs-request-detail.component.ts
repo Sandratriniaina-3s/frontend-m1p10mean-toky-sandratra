@@ -78,9 +78,6 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
           this.repair = res[0];
           this.operationsList = this.repair.operations;
           console.log(res[0])
-          if (res[0].paymentStatus === PaymentStatus.PAID) {
-            this.loadPayment(res[0]._id);
-          }
         }
       });
   }
@@ -95,31 +92,6 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
 
   disableChecker(): boolean {
     return this.operationsList.every((v: any) => v.done === true);
-  }
-
-  onPay(form: any) {
-    const payment = form.value as Payment;
-    this.financeService
-      .savePayment({
-        ...payment,
-        repair: this.repair._id,
-        createdAt: new Date(),
-      })
-      .subscribe((res) => {});
-    this.workshopService
-      .saveRepair({ ...this.repair, paymentStatus: PaymentStatus.PAID })
-      .subscribe((res) => {console.log(res)});
-    setTimeout(() => {
-      this.getRepair();
-    }, 200);
-  }
-
-  loadPayment(repairId: string) {
-    this.subs.sink = this.financeService
-      .getPaymentByRepair(repairId)
-      .subscribe((value) => {
-        this.payment = value;
-      });
   }
 
   private initForm(payment: Payment) {

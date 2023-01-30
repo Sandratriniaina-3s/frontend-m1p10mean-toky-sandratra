@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { RepairsFormComponent } from 'src/app/client/repairs-form/repairs-form.component';
 import { Payment } from 'src/app/types/payments.interface';
 import { Repair } from 'src/app/types/repairs.interface';
 import { UserRole } from 'src/app/types/user.interface';
+import { WorkshopService } from 'src/app/workshop/workshop.service';
 import { FinanceService } from '../finance.service';
 
 @Component({
@@ -23,11 +24,12 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
   isLoading = true ;
   payments!:Payment[];
   repairs!:Repair[];
+  repair!:Repair;
 
   @ViewChild('table', { static: true, read: MatTable })
   table!: { renderRows: () => void; };
 
-  constructor(private financeService: FinanceService, private dialog: MatDialog) { }
+  constructor(private financeService: FinanceService, private dialog: MatDialog , private workshopService:WorkshopService) { }
   ngOnDestroy(): void {
     this.paymentSub.unsubscribe();
   }
@@ -43,19 +45,21 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
     })
   }
 
-  onAddClick(){
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.width = "auto";
-    dialogConfig.height = "auto";
-    dialogConfig.data = { role: UserRole.RESPONABLE_FINANCIER};
-    let dialogRef = this.dialog.open(RepairsFormComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(res => {
-      if(res.data !== undefined){
-        this.dataSource.data.push(res.data);
-        this.table.renderRows();
-      }
+  loadRepair(repair:string){
+    return new Promise<void>((resolve)=>{
+      this.workshopService.getRepairsDetailById(repair).subscribe((value)=>{
+        this.repair = value[0];
+        resolve()
+        console.log(this.repair)
+      })
     })
+  }
+
+  onAddClick(repair:string){
+    this.loadRepair(repair).then(()=>{
+      console.log(this.repair)
+      this.dialog.open(PaymentDialog,{data:this.repair});
+    });
   }
 
   onSearchClick(){
@@ -75,3 +79,13 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
   }
 
 }
+
+@Component({
+  selector: 'payment-dialog',
+  templateUrl: 'payment-dialog.html',
+})
+
+export class PaymentDialog{
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Repair) {}
+}
+

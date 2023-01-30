@@ -5,7 +5,7 @@
     <form [formGroup]="form">
       <mat-form-field>
           <mat-label>Montant</mat-label>
-          <input matInput type="number" #amountInput formControlName="amount">
+          <input matInput type="number" #amountInput [(ngModel)]="repair.cost" formControlName="amount">
           <mat-error>Champ requis</mat-error>
       </mat-form-field>
     </form>
