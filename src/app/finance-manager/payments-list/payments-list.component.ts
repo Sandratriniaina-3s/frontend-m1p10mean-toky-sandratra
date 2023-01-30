@@ -3,6 +3,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { RepairsFormComponent } from 'src/app/client/repairs-form/repairs-form.component';
+import { Payment } from 'src/app/types/payments.interface';
+import { Repair } from 'src/app/types/repairs.interface';
 import { UserRole } from 'src/app/types/user.interface';
 import { FinanceService } from '../finance.service';
 
@@ -19,6 +21,8 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   paymentSub : Subscription = new Subscription();
   isLoading = true ;
+  payments!:Payment[];
+  repairs!:Repair[];
 
   @ViewChild('table', { static: true, read: MatTable })
   table!: { renderRows: () => void; };
@@ -33,9 +37,8 @@ export class PaymentsListComponent implements OnInit, OnDestroy {
   }
 
   loadPayments(){
-    this.paymentSub = this.financeService.getAllPayments().subscribe((res)=>{
-      this.dataSource = new MatTableDataSource(res);
-      console.log(res)
+    this.paymentSub = this.financeService.getAllUnpaidRepairs().subscribe((res)=>{
+      this.repairs = res;
       this.isLoading = false;
     })
   }

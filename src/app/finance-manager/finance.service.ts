@@ -70,4 +70,11 @@ export class FinanceService {
               .get(`${environment.apiUrl}/profits`)
               .pipe(map((response: ApiResponse)=> response.data as Profit[]));
   }
+
+  /**To be paid repairs */
+  getAllUnpaidRepairs(): Observable<Repair[]>{
+    return this.http
+              .get(`${environment.apiUrl}/repairs/unpaid`)
+              .pipe(map((response: ApiResponse)=> response.data as Repair[]));
+  }
 }
