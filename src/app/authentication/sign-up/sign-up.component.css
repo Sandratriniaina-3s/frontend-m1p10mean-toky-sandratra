@@ -50,4 +50,6 @@ mat-card-title {
   font-size: larger;
 }
 
-
+mat-form-field{
+  margin-bottom: 12px;
+}
