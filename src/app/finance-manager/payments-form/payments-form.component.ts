@@ -50,7 +50,9 @@ export class PaymentsFormComponent implements OnInit {
         paymentStatus: PaymentStatus.PAID,
         supervisor: (this.repair?.supervisor as User)?._id,
       } as Repair)
-      .subscribe((res) => {});
+      .subscribe((res) => {
+          this.dialog.closeAll();
+      });
     })
   }
 
