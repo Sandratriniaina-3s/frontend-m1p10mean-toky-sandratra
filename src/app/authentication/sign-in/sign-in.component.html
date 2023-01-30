@@ -9,14 +9,14 @@
 
 
                     <div class="wrap-input100 validate-input" data-validate="Login is required">
-                        <input class="input100" type="text" name="login" (input)="onLoginInput()" formControlName="login">
+                        <input class="input100" type="text" name="login" [(ngModel)]="credentials.login" (input)="onLoginInput()" formControlName="login">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Login</span>
                     </div>
 
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="pass" (input)="onPasswordInput()" formControlName="password">
+                        <input class="input100" type="password" name="pass" [(ngModel)]="credentials.passowrd" (input)="onPasswordInput()" formControlName="password">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Mot de passe</span>
                     </div>

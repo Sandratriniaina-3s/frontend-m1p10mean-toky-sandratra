@@ -21,6 +21,10 @@ export class SignInComponent implements OnInit, OnDestroy {
   user = {} as User;
   loginSub: Subscription = new Subscription();
   btnLoginState : boolean = true
+  credentials = {
+    login:'Finance',
+    passowrd:'1234'
+  }
 
   ngOnInit(): void {
     const role = this.tokenService.getRole();
