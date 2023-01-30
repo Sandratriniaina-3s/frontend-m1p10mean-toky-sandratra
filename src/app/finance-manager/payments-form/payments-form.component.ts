@@ -48,7 +48,7 @@ export class PaymentsFormComponent implements OnInit {
       .saveRepair({
         ...this.repair,
         paymentStatus: PaymentStatus.PAID,
-        car: (this.repair.car as Car)._id,
+        operations:this.repair.operations,
         supervisor: (this.repair?.supervisor as User)?._id,
       } as Repair)
       .subscribe((res) => {});
