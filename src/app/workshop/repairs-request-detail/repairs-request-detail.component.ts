@@ -108,7 +108,7 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
       .subscribe((res) => {});
     this.workshopService
       .saveRepair({ ...this.repair, paymentStatus: PaymentStatus.PAID })
-      .subscribe((res) => {});
+      .subscribe((res) => {console.log(res)});
     setTimeout(() => {
       this.getRepair();
     }, 200);
