@@ -53,7 +53,7 @@
                   <button mat-icon-button [disabled]="disableOtherTask"  *ngIf="element.operations.length == 0" (click)="onAddOperationClick()">
                     <mat-icon>add_box</mat-icon>
                   </button>
-                  <button mat-icon-button   *ngIf="element.operations.length > 0" (click)="onViewDetailClik()">
+                  <button mat-icon-button [disabled]="disableOtherTask"  *ngIf="element.operations.length > 0" (click)="onViewDetailClik()">
                     <mat-icon>remove_red_eye</mat-icon>
                   </button>
                 </div>
