@@ -22,9 +22,6 @@ export class ClientAccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUser();
-    setTimeout(()=>{
-      this.form = this.initForm(this.user);
-    },150)
   }
 
   private subs = new SubSink();
@@ -37,6 +34,7 @@ export class ClientAccountComponent implements OnInit {
     const userId = this.tokenService.getId();
     this.subs.sink = this.authenticationService.getUserById(userId as string).subscribe((value)=>{
       this.user = value;
+      this.form = this.initForm(value);
     })
   }
 

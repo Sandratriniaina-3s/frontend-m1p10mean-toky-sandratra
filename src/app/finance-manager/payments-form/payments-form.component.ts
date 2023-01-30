@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output,Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Car } from 'src/app/types/car.interface';
 import { EMPTY_PAYMENT, Payment, PaymentStatus, Receipt } from 'src/app/types/payments.interface';
 import { Repair } from 'src/app/types/repairs.interface';
+import { User } from 'src/app/types/user.interface';
 import { WorkshopService } from 'src/app/workshop/workshop.service';
 import { SubSink } from 'subsink';
 import { FinanceService } from '../finance.service';
@@ -40,8 +42,18 @@ export class PaymentsFormComponent implements OnInit {
 
   onSubmit(form:any){
     const payment = form.value as Payment;
-    this.financeService.savePayment({...payment,repair : this.repair as Repair, createdAt:new Date()}).subscribe((res)=>{});
-    this.repairService.saveRepair({...this.repair, paymentStatus:PaymentStatus.PAID}).subscribe((res)=>{});
+    this.financeService.savePayment({...payment,repair : this.repair._id, createdAt:new Date()}).subscribe((res)=>{});
+    setTimeout(()=>{
+      this.repairService
+      .saveRepair({
+        ...this.repair,
+        paymentStatus: PaymentStatus.PAID,
+        supervisor: (this.repair?.supervisor as User)?._id,
+      } as Repair)
+      .subscribe((res) => {
+          this.dialog.closeAll();
+      });
+    })
   }
 
   loadPayment(){

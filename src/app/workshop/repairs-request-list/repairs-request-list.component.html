@@ -4,10 +4,10 @@
 
 <div class="container" [ngClass]="{'hide':isLoading, 'show':!isLoading}">
 
-  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms"
+  <mat-tab-group mat-stretch-tabs="false" [selectedIndex]="selectedTab.value" mat-align-tabs="start" animationDuration="0ms"
   (selectedIndexChange)="onSelectedTabChange($event)">
     <mat-tab label="LISTE DE DEMANDE">
-        <div class="empty-container" [ngClass]="{'show': dataSourceLength == 0,'hide': dataSourceLength>0 }">
+        <div class="empty-container" [ngClass]="{'show-empty-icon': dataSourceLength == 0,'hide': dataSourceLength>0 }">
           <mat-icon>inbox</mat-icon>
           <span class="label">Aucune donnée</span>
         </div>
@@ -72,7 +72,7 @@
       <app-repairs-request-detail #repCompo></app-repairs-request-detail>
     </mat-tab>
     <mat-tab label="TERMINE">
-      <div class="empty-container" [ngClass]="{'show': dataSourceRepairedLength == 0,'hide': dataSourceRepairedLength>0 }">
+      <div class="empty-container" [ngClass]="{'show-empty-icon': dataSourceRepairedLength == 0,'hide': dataSourceRepairedLength>0 }">
         <mat-icon>inbox</mat-icon>
         <span class="label">Aucune donnée</span>
       </div>

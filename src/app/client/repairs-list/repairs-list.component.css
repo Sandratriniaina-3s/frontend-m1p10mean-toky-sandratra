@@ -151,7 +151,34 @@ width: 20%;
   display: flow-root;
 }
 
+.show-empty-icon{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 438px;;
+}
 
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 438px;
+}
+
+.empty-container .mat-icon{
+  font-size: 134px;
+  height: unset;
+  width: unset;
+  color: rgba(128, 128, 128, 0.445);
+}
+
+.empty-container .label{
+  color:  rgba(128, 128, 128, 0.445);;
+  font-size: large;
+  font-weight: 500;
+}
 
 
 

@@ -25,11 +25,58 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    if (
-      this.operationsList !== undefined &&
-      this.repair !== undefined &&
-      (this.repair.supervisor as User)._id !== undefined
-    ) {
+    this.repairSub.unsubscribe();
+  }
+
+  operationsList: any;
+  repair!: Repair;
+  repairTemp!: Repair;
+  repairSub: Subscription = new Subscription();
+  repairToSend = {} as Repair;
+  //payment!: Payment;
+  //form = this.initForm(EMPTY_PAYMENT);
+  private subs = new SubSink();
+
+  ngOnInit(): void {
+    this.getRepair();
+  }
+
+  /*ngOnChanges(changes: SimpleChanges): void {
+   this.getRepair();
+  }*/
+
+  getRepair() {
+    this.repairSub = this.workshopService
+      .getRepairBySupervisor(this.tokenService.getId() as string)
+      .subscribe((res) => {
+        if (res[0] !== undefined) {
+          this.repair = res[0];
+          console.log(res[0])
+          this.repairTemp =  res[0];
+          this.operationsList = this.repair.operations;
+        }
+      });
+  }
+
+  drop(event: any) {
+    moveItemInArray(
+      this.operationsList,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
+  disableSaveCheckers(): boolean{
+    if((JSON.stringify(this.repairTemp)) === (JSON.stringify(this.repair))){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  saveProgression(){
+    if (this.operationsList !== undefined && this.repair !== undefined && (this.repair.supervisor as User)._id !== undefined) {
       this.repair.operations = this.operationsList;
       this.repairToSend = this.repair;
       this.repairToSend.supervisor = (this.repair.supervisor as User)._id;
@@ -48,56 +95,17 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
 
       this.repairSub = this.workshopService
         .saveRepairAndStart(this.repairToSend)
-        .subscribe((res) => {});
+        .subscribe((res) => {
+          this.repairTemp = this.repair;
+        });
     }
-
-    this.repairSub.unsubscribe();
-  }
-
-  operationsList: any;
-  repair!: Repair;
-  repairSub: Subscription = new Subscription();
-  repairToSend = {} as Repair;
-  payment!: Payment;
-  form = this.initForm(EMPTY_PAYMENT);
-  private subs = new SubSink();
-
-  ngOnInit(): void {
-    this.getRepair();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-   this.getRepair();
-  }
-
-  getRepair() {
-    this.repairSub = this.workshopService
-      .getRepairBySupervisor(this.tokenService.getId() as string)
-      .subscribe((res) => {
-        if (res[0] !== undefined) {
-          this.repair = res[0];
-          this.operationsList = this.repair.operations;
-          console.log(res[0])
-          if (res[0].paymentStatus === PaymentStatus.PAID) {
-            this.loadPayment(res[0]._id);
-          }
-        }
-      });
-  }
-
-  drop(event: any) {
-    moveItemInArray(
-      this.operationsList,
-      event.previousIndex,
-      event.currentIndex
-    );
   }
 
   disableChecker(): boolean {
     return this.operationsList.every((v: any) => v.done === true);
   }
 
-  onPay(form: any) {
+  /*onPay(form: any) {
     const payment = form.value as Payment;
     this.financeService
       .savePayment({
@@ -108,7 +116,7 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
       .subscribe((res) => {});
     this.workshopService
       .saveRepair({ ...this.repair, paymentStatus: PaymentStatus.PAID })
-      .subscribe((res) => {});
+      .subscribe((res) => {console.log(res)});
     setTimeout(() => {
       this.getRepair();
     }, 200);
@@ -127,5 +135,5 @@ export class RepairsRequestDetailComponent implements OnInit, OnDestroy {
       _id: [payment._id],
       amount: [payment.amount, Validators.required],
     });
-  }
+  }*/
 }

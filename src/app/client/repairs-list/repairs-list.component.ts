@@ -22,6 +22,7 @@ export class RepairsListComponent implements OnInit, OnDestroy {
   searchTerm: string = '';
   repairSub : Subscription = new Subscription();
   isLoading = true ;
+  dataSourceLength = 0;
 
   @ViewChild('table', { static: true, read: MatTable })
   table!: { renderRows: () => void; };
@@ -39,9 +40,15 @@ export class RepairsListComponent implements OnInit, OnDestroy {
 
   loadRepairs() {
     this.repairSub = this.workshopService.getAllRepairs().subscribe((res) => {
-      this.dataSource = new MatTableDataSource(res);
-      for (var repair of this.dataSource.data) {
-        this.separateDateAndTime(repair);
+
+
+      if (res.length > 0) {
+        //console.log(this.dataSource.data.length)
+        this.dataSource = new MatTableDataSource(res);
+        this.dataSourceLength = this.dataSource.data.length;
+        for (var repair of this.dataSource.data) {
+          this.separateDateAndTime(repair);
+        }
       }
       this.isLoading = false;
     })
@@ -76,8 +83,16 @@ export class RepairsListComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(RepairsFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(res => {
       if(res.data !== undefined){
-        this.separateDateAndTime(res.data);
-        this.dataSource.data.push(res.data);
+        if(this.dataSourceLength == 0){
+          this.dataSource = new MatTableDataSource(res.dat);
+          this.separateDateAndTime(res.data);
+          this.dataSource.data.push(res.data);
+        }
+        else{
+          this.separateDateAndTime(res.data);
+          this.dataSource.data.push(res.data);
+        }
+        this.dataSourceLength = this.dataSource.data.length;
         this.table.renderRows();
       }
     })

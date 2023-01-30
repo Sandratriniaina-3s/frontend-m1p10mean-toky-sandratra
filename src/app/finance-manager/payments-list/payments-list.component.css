@@ -146,8 +146,68 @@ width: 20%;
   display: flow-root;
 }
 
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
 
+.list table{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
 
+.list table thead,
+.list table tbody{
+  width: 100%;
+}
 
+.list table tbody{
+  display: flex;
+  flex-direction: column;
+}
 
+.list table thead tr,
+.list table tbody tr{
+  width: 100%;
+  text-align: left;
+}
 
+.list table thead{
+  background-color: #6675df;
+  font-family: Poppins-Bold;
+  color: #fff;
+}
+
+.list table thead tr th{
+  height: 45px;
+  width: 14vw;
+  text-align: center;
+}
+
+.list table tbody tr{
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 1, 0.232);
+  margin: 5px 0;
+  font-family: Poppins-REgular;
+}
+.list table tbody tr td{
+  height: 45px;
+  background-color: #fff;
+  width: 14vw;
+}
+
+td,tr{
+  text-align: center;
+}
+
+#pay{
+  color: rgb(55, 196, 55);
+  cursor: pointer;
+}

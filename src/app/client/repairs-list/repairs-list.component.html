@@ -5,18 +5,21 @@
 
 <div class="container" [ngClass]="{'hide':isLoading, 'show':!isLoading}">
 
-  <mat-card>
+  <div class="button-actions">
+    <!--<button mat-flat-button class="btn-search" (click)="onSearchClik()" [disabled]="disableCheck()">
+      <mat-icon>search</mat-icon>
+    </button>-->
+    <button mat-flat-button color="primary"  class="btn-add" (click)="onAddClick()">
+      <span style="margin-left: 10px;">Demander une reparation</span>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div [ngClass]="{'empty-container': dataSourceLength == 0,'hide': dataSourceLength>0 }">
+    <mat-icon>inbox</mat-icon>
+    <span class="label">Aucune donnée</span>
+  </div>
+  <mat-card class="mat-elevation-z3" [ngClass]="{'show': dataSourceLength>0 , 'hide':dataSourceLength == 0}">
     <mat-card-header>
-
-      <div class="button-actions">
-        <!--<button mat-flat-button class="btn-search" (click)="onSearchClik()" [disabled]="disableCheck()">
-          <mat-icon>search</mat-icon>
-        </button>-->
-        <button mat-flat-button color="primary"  class="btn-add" (click)="onAddClick()">
-          <span class="btn-add-role-name"></span>
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
 
       <!--<div class="search-bar-container mat-elevation-z3">
         <input type="text" [(ngModel)]="searchTerm" placeholder=" Rechercher .... ">
@@ -24,7 +27,8 @@
 
     </mat-card-header>
     <mat-card-content>
-      <table #table mat-table [dataSource]="dataSource" class="mat-elevation-z3">
+
+      <table #table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="registration">
           <th mat-header-cell *matHeaderCellDef class="col-1"> Immatriculation </th>
           <td mat-cell *matCellDef="let element"> {{element.car.registration}} </td>
@@ -50,7 +54,7 @@
           <td mat-cell *matCellDef="let element">
             <span *ngIf="!element.actions" class="right"> {{element.time}} </span>
             <div class="right" *ngIf="element.actions">
-              <button mat-icon-button [disabled]="" (click)="onViewClik()">
+              <button mat-icon-button (click)="onViewClik()">
                 <mat-icon>remove_red_eye</mat-icon>
               </button>
             </div>
