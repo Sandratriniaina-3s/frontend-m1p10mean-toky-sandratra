@@ -92,8 +92,6 @@ export class RepairsListComponent implements OnInit, OnDestroy {
           this.separateDateAndTime(res.data);
           this.dataSource.data.push(res.data);
         }
-
-        console.log(this.dataSourceLength);
         this.dataSourceLength = this.dataSource.data.length;
         this.table.renderRows();
       }

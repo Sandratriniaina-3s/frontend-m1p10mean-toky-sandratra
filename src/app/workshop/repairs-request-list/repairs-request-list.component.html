@@ -4,7 +4,7 @@
 
 <div class="container" [ngClass]="{'hide':isLoading, 'show':!isLoading}">
 
-  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms"
+  <mat-tab-group mat-stretch-tabs="false" [selectedIndex]="selectedTab.value" mat-align-tabs="start" animationDuration="0ms"
   (selectedIndexChange)="onSelectedTabChange($event)">
     <mat-tab label="LISTE DE DEMANDE">
         <div class="empty-container" [ngClass]="{'show-empty-icon': dataSourceLength == 0,'hide': dataSourceLength>0 }">
@@ -53,7 +53,7 @@
                   <button mat-icon-button [disabled]="disableOtherTask"  *ngIf="element.operations.length == 0" (click)="onAddOperationClick()">
                     <mat-icon>add_box</mat-icon>
                   </button>
-                  <button mat-icon-button [disabled]="disableOtherTask"  *ngIf="element.operations.length > 0" (click)="onViewDetailClik()">
+                  <button mat-icon-button   *ngIf="element.operations.length > 0" (click)="onViewDetailClik()">
                     <mat-icon>remove_red_eye</mat-icon>
                   </button>
                 </div>

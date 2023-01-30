@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
@@ -26,6 +27,8 @@ export class RepairsRequestListComponent implements OnInit, OnDestroy {
   repairSub : Subscription = new Subscription();
   isLoading = true ;
   disableOtherTask = true;
+
+  selectedTab = new FormControl(0);
 
   dataSourceLength:number = 0;
 
@@ -122,11 +125,6 @@ export class RepairsRequestListComponent implements OnInit, OnDestroy {
   }
 
   onViewDetailClik(){
-    /*const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = "50%";
-    dialogConfig.height = "auto";
-    dialogConfig.data = { repair: this.element } ;*/
-    //this.dialog.open(RepairsDetailsComponent, dialogConfig);
     let i : number = this.elementIndex;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -140,6 +138,7 @@ export class RepairsRequestListComponent implements OnInit, OnDestroy {
         this.dataSourceLength = this.dataSource.data.length;
         this.table.renderRows();
         this.disableOtherTask = true;
+        this.selectedTab.setValue(1);
       }
     })
   }
